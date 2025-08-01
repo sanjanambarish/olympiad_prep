@@ -36,6 +36,8 @@ def generate_student_report(student_id, student_name):
         df['question_text'] = "Question text not available"
 
     df['attempted_at'] = pd.to_datetime(df['attempted_at'])
+    # Remove timezone information for Excel compatibility
+    df['attempted_at'] = df['attempted_at'].dt.tz_localize(None)
     df['is_correct'] = df['is_correct'].map({True: '✅ Correct', False: '❌ Incorrect'})
 
     report_df = df[[

@@ -3,6 +3,13 @@ import plotly.express as px
 import streamlit as st
 from supabase_client import supabase
 import json
+
+# Try to import matplotlib for styling, but handle gracefully if not available
+try:
+    import matplotlib.pyplot as plt
+    MATPLOTLIB_AVAILABLE = True
+except ImportError:
+    MATPLOTLIB_AVAILABLE = False
 def get_student_attempts(student_id):
     """Fetch all quiz attempts from Supabase"""
     try:
@@ -96,10 +103,15 @@ def show_student_analytics(student_id):
     st.plotly_chart(fig2, use_container_width=True)
 
     # Show table
-    st.dataframe(
-        chapter_perf.style.format({"accuracy": "{}%"}).background_gradient(cmap='RdYlGn', subset=["accuracy"]),
-        use_container_width=True
-    )
+    # Apply styling only if matplotlib is available
+    if MATPLOTLIB_AVAILABLE:
+        st.dataframe(
+            chapter_perf.style.format({"accuracy": "{}%"}).background_gradient(cmap='RdYlGn', subset=["accuracy"]),
+            use_container_width=True
+        )
+    else:
+        # Fallback to regular dataframe without styling
+        st.dataframe(chapter_perf.style.format({"accuracy": "{}%"}), use_container_width=True)
 
     st.markdown("---")
 

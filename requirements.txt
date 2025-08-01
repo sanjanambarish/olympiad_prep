@@ -2,6 +2,7 @@ streamlit
 supabase
 matplotlib
 pandas
+matplotlib
 plotly
 openpyxl
 xlsxwriter

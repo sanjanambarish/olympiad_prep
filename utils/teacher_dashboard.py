@@ -5,6 +5,13 @@ from supabase_client import supabase
 import json
 from datetime import datetime
 
+# Try to import matplotlib for styling, but handle gracefully if not available
+try:
+    import matplotlib.pyplot as plt
+    MATPLOTLIB_AVAILABLE = True
+except ImportError:
+    MATPLOTLIB_AVAILABLE = False
+
 def teacher_dashboard(teacher_id):
     # Fetch all students
     try:
@@ -19,6 +26,14 @@ def teacher_dashboard(teacher_id):
 
     st.subheader("🎓 All Students")
     st.dataframe(students_df[['full_name', 'email', 'class']], use_container_width=True)
+    
+    # Video Resources Section
+    st.markdown("---")
+    st.subheader("📺 Recommended Learning Resources")
+    st.info("Share these NCERT video resources with your students for better understanding")
+    if st.button("📚 Browse Video Resources"):
+        st.session_state.page = "video_resources"
+        st.rerun()
 
     # Student selection
     student_names = students_df['full_name'].tolist()
@@ -82,10 +97,15 @@ def teacher_dashboard(teacher_id):
                       title="Chapter-wise Accuracy", labels={"accuracy": "Accuracy (%)"})
         st.plotly_chart(fig2, use_container_width=True)
 
-        st.dataframe(
-            chapter_perf.style.format({"accuracy": "{}%"}).background_gradient(cmap='RdYlGn', subset=["accuracy"]),
-            use_container_width=True
-        )
+        # Apply styling only if matplotlib is available
+        if MATPLOTLIB_AVAILABLE:
+            st.dataframe(
+                chapter_perf.style.format({"accuracy": "{}%"}).background_gradient(cmap='RdYlGn', subset=["accuracy"]),
+                use_container_width=True
+            )
+        else:
+            # Fallback to regular dataframe without styling
+            st.dataframe(chapter_perf.style.format({"accuracy": "{}%"}), use_container_width=True)
 
         # === Weak Areas ===
         st.markdown("#### 🔍 Areas Needing Improvement")
@@ -151,10 +171,15 @@ def teacher_dashboard(teacher_id):
                           labels={"avg_accuracy": "Avg Accuracy (%)"})
             st.plotly_chart(fig3, use_container_width=True)
 
-            st.dataframe(
-                class_perf.style.format({"avg_accuracy": "{}%"}).background_gradient(cmap='RdYlGn', subset=["avg_accuracy"]),
-                use_container_width=True
-            )
+            # Apply styling only if matplotlib is available
+            if MATPLOTLIB_AVAILABLE:
+                st.dataframe(
+                    class_perf.style.format({"avg_accuracy": "{}%"}).background_gradient(cmap='RdYlGn', subset=["avg_accuracy"]),
+                    use_container_width=True
+                )
+            else:
+                # Fallback to regular dataframe without styling
+                st.dataframe(class_perf.style.format({"avg_accuracy": "{}%"}), use_container_width=True)
 
             # Download Class Report
             from utils.reports import generate_class_report
