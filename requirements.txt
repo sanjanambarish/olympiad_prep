@@ -1,0 +1,7 @@
+streamlit
+supabase
+pandas
+plotly
+openpyxl
+xlsxwriter
+python-dotenv  # for managing keys later

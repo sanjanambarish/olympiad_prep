@@ -1,0 +1,1205 @@
+[
+  {
+    "id": 1,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Mensuration",
+    "topic": "Perimeter",
+    "question_text": "What is the perimeter of a square with side 7 cm?",
+    "options": {
+      "A": "14 cm",
+      "B": "21 cm",
+      "C": "28 cm",
+      "D": "49 cm"
+    },
+    "correct_answer": "C",
+    "difficulty": "Easy",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 2,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Mensuration",
+    "topic": "Area of Triangle",
+    "question_text": "What is the area of a triangle with base 10 cm and height 6 cm?",
+    "options": {
+      "A": "30 cm²",
+      "B": "60 cm²",
+      "C": "16 cm²",
+      "D": "20 cm²"
+    },
+    "correct_answer": "A",
+    "difficulty": "Easy",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 3,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Mensuration",
+    "topic": "Area of Trapezium",
+    "question_text": "The area of a trapezium with parallel sides 8 cm and 6 cm and height 5 cm is:",
+    "options": {
+      "A": "30 cm²",
+      "B": "35 cm²",
+      "C": "40 cm²",
+      "D": "25 cm²"
+    },
+    "correct_answer": "B",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 4,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Mensuration",
+    "topic": "Area of Rhombus",
+    "question_text": "What is the area of a rhombus with diagonals 10 cm and 8 cm?",
+    "options": {
+      "A": "40 cm²",
+      "B": "80 cm²",
+      "C": "100 cm²",
+      "D": "20 cm²"
+    },
+    "correct_answer": "A",
+    "difficulty": "Easy",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 5,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Mensuration",
+    "topic": "Surface Area of Cube",
+    "question_text": "What is the total surface area of a cube with side 5 cm?",
+    "options": {
+      "A": "125 cm²",
+      "B": "100 cm²",
+      "C": "150 cm²",
+      "D": "150 cm³"
+    },
+    "correct_answer": "C",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 6,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Mensuration",
+    "topic": "Surface Area of Cuboid",
+    "question_text": "Total surface area of a cuboid with dimensions 10 cm, 4 cm, 3 cm is:",
+    "options": {
+      "A": "94 cm²",
+      "B": "248 cm²",
+      "C": "164 cm²",
+      "D": "100 cm²"
+    },
+    "correct_answer": "C",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 7,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Mensuration",
+    "topic": "Volume of Cube",
+    "question_text": "What is the volume of a cube with edge 6 cm?",
+    "options": {
+      "A": "216 cm³",
+      "B": "36 cm³",
+      "C": "72 cm³",
+      "D": "96 cm³"
+    },
+    "correct_answer": "A",
+    "difficulty": "Easy",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 8,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Mensuration",
+    "topic": "Volume of Cuboid",
+    "question_text": "The volume of a cuboid with length 8 cm, breadth 5 cm and height 2 cm is:",
+    "options": {
+      "A": "80 cm³",
+      "B": "70 cm³",
+      "C": "60 cm³",
+      "D": "90 cm³"
+    },
+    "correct_answer": "A",
+    "difficulty": "Easy",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 9,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Mensuration",
+    "topic": "Volume of Cylinder",
+    "question_text": "Volume of a cylinder with radius 7 cm and height 10 cm is (π = 22/7):",
+    "options": {
+      "A": "1540 cm³",
+      "B": "770 cm³",
+      "C": "220 cm³",
+      "D": "440 cm³"
+    },
+    "correct_answer": "A",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 10,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Mensuration",
+    "topic": "Surface Area of Cylinder",
+    "question_text": "The curved surface area of a cylinder with radius 3 cm and height 10 cm is:",
+    "options": {
+      "A": "94.2 cm²",
+      "B": "188.4 cm²",
+      "C": "282.6 cm²",
+      "D": "60 cm²"
+    },
+    "correct_answer": "B",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 11,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Mensuration",
+    "topic": "Unit Conversion",
+    "question_text": "How many cm³ are there in 1 litre?",
+    "options": {
+      "A": "100 cm³",
+      "B": "10 cm³",
+      "C": "1000 cm³",
+      "D": "10000 cm³"
+    },
+    "correct_answer": "C",
+    "difficulty": "Easy",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 12,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Mensuration",
+    "topic": "Application of Volume",
+    "question_text": "How many cubes of side 2 cm can be made from a cube of side 6 cm?",
+    "options": {
+      "A": "9",
+      "B": "18",
+      "C": "27",
+      "D": "36"
+    },
+    "correct_answer": "C",
+    "difficulty": "Hard",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 13,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Mensuration",
+    "topic": "Area Comparison",
+    "question_text": "Which has more area: a square of side 10 cm or a circle of radius 5 cm? (Use π = 3.14)",
+    "options": {
+      "A": "Square",
+      "B": "Circle",
+      "C": "Both have equal area",
+      "D": "Cannot be determined"
+    },
+    "correct_answer": "A",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 14,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Mensuration",
+    "topic": "Conceptual",
+    "question_text": "What is the difference between volume and capacity?",
+    "options": {
+      "A": "Volume is always larger",
+      "B": "Capacity is used for solids",
+      "C": "They are the same",
+      "D": "Volume is space occupied, capacity is quantity held"
+    },
+    "correct_answer": "D",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 15,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Mensuration",
+    "topic": "Area of Circle",
+    "question_text": "Area of a circle of radius 7 cm is:",
+    "options": {
+      "A": "154 cm²",
+      "B": "44 cm²",
+      "C": "77 cm²",
+      "D": "100 cm²"
+    },
+    "correct_answer": "A",
+    "difficulty": "Easy",
+    "question_type": "MCQ"
+  },
+  
+  {
+    "id": 16,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Data Handling",
+    "topic": "Understanding Data",
+    "question_text": "Which of the following is NOT an example of data?",
+    "options": {
+      "A": "Marks obtained in a test",
+      "B": "Temperature every day",
+      "C": "A random thought",
+      "D": "Height of students"
+    },
+    "correct_answer": "C",
+    "difficulty": "Easy",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 17,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Data Handling",
+    "topic": "Pictograph",
+    "question_text": "A pictograph uses _____ to represent data.",
+    "options": {
+      "A": "lines",
+      "B": "symbols or pictures",
+      "C": "numbers only",
+      "D": "tables"
+    },
+    "correct_answer": "B",
+    "difficulty": "Easy",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 18,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Data Handling",
+    "topic": "Bar Graph",
+    "question_text": "In a bar graph, the height of each bar shows:",
+    "options": {
+      "A": "Type of item",
+      "B": "Quantity or value",
+      "C": "Color of data",
+      "D": "None of these"
+    },
+    "correct_answer": "B",
+    "difficulty": "Easy",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 19,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Data Handling",
+    "topic": "Bar Graph",
+    "question_text": "Which type of graph is best used for comparing data across categories?",
+    "options": {
+      "A": "Line Graph",
+      "B": "Bar Graph",
+      "C": "Pie Chart",
+      "D": "Histogram"
+    },
+    "correct_answer": "B",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 20,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Data Handling",
+    "topic": "Double Bar Graph",
+    "question_text": "What does a double bar graph help compare?",
+    "options": {
+      "A": "Data in a single category",
+      "B": "Same data in different formats",
+      "C": "Two sets of data",
+      "D": "Data from multiple years"
+    },
+    "correct_answer": "C",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 21,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Data Handling",
+    "topic": "Pie Chart",
+    "question_text": "Which chart is useful for showing proportions of a whole?",
+    "options": {
+      "A": "Line Graph",
+      "B": "Bar Graph",
+      "C": "Pie Chart",
+      "D": "Histogram"
+    },
+    "correct_answer": "C",
+    "difficulty": "Easy",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 22,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Data Handling",
+    "topic": "Pie Chart",
+    "question_text": "What is the total angle of a circle used in a pie chart?",
+    "options": {
+      "A": "90°",
+      "B": "180°",
+      "C": "270°",
+      "D": "360°"
+    },
+    "correct_answer": "D",
+    "difficulty": "Easy",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 23,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Data Handling",
+    "topic": "Probability Basics",
+    "question_text": "When a fair coin is tossed, what is the probability of getting a head?",
+    "options": {
+      "A": "0",
+      "B": "1",
+      "C": "1/2",
+      "D": "1/4"
+    },
+    "correct_answer": "C",
+    "difficulty": "Easy",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 24,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Data Handling",
+    "topic": "Probability Basics",
+    "question_text": "What is the probability of getting a number less than 3 on a die?",
+    "options": {
+      "A": "1/6",
+      "B": "1/2",
+      "C": "2/6",
+      "D": "3/6"
+    },
+    "correct_answer": "C",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 25,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Data Handling",
+    "topic": "Equally Likely Outcomes",
+    "question_text": "Which of the following is a random experiment?",
+    "options": {
+      "A": "Reading a book",
+      "B": "Writing an exam",
+      "C": "Tossing a coin",
+      "D": "Walking in a park"
+    },
+    "correct_answer": "C",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 26,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Data Handling",
+    "topic": "Probability Application",
+    "question_text": "If there are 3 red and 2 yellow balls in a bag, the probability of picking a red ball is:",
+    "options": {
+      "A": "1/2",
+      "B": "3/5",
+      "C": "2/3",
+      "D": "5/3"
+    },
+    "correct_answer": "B",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 27,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Data Handling",
+    "topic": "Outcomes",
+    "question_text": "What is the number of outcomes when rolling a die once?",
+    "options": {
+      "A": "5",
+      "B": "6",
+      "C": "7",
+      "D": "8"
+    },
+    "correct_answer": "B",
+    "difficulty": "Easy",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 28,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Data Handling",
+    "topic": "Real-life Probability",
+    "question_text": "The chance of rain tomorrow is best described as:",
+    "options": {
+      "A": "A random experiment",
+      "B": "A probability",
+      "C": "A number greater than 1",
+      "D": "Not measurable"
+    },
+    "correct_answer": "B",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 29,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Data Handling",
+    "topic": "Graphs",
+    "question_text": "What is essential for a good bar graph?",
+    "options": {
+      "A": "Colored bars",
+      "B": "Equal width of bars",
+      "C": "Unequal spacing",
+      "D": "Curved lines"
+    },
+    "correct_answer": "B",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 30,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Data Handling",
+    "topic": "Event Probability",
+    "question_text": "If you toss a coin 100 times, the number of heads and tails should be:",
+    "options": {
+      "A": "Equal or almost equal",
+      "B": "Always heads",
+      "C": "Always tails",
+      "D": "Only heads then only tails"
+    },
+    "correct_answer": "A",
+    "difficulty": "Hard",
+    "question_type": "MCQ"
+  },
+  
+  {
+    "id": 31,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Direct and Inverse Proportions",
+    "topic": "Direct Proportion",
+    "question_text": "If 5 kg of sugar costs ₹150, what will be the cost of 8 kg of sugar?",
+    "options": {
+      "A": "₹200",
+      "B": "₹220",
+      "C": "₹240",
+      "D": "₹250"
+    },
+    "correct_answer": "C",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 32,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Direct and Inverse Proportions",
+    "topic": "Direct Proportion",
+    "question_text": "In direct proportion, the ratio x/y is:",
+    "options": {
+      "A": "Increases",
+      "B": "Decreases",
+      "C": "Constant",
+      "D": "Variable"
+    },
+    "correct_answer": "C",
+    "difficulty": "Easy",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 33,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Direct and Inverse Proportions",
+    "topic": "Inverse Proportion",
+    "question_text": "Which of the following is an example of inverse proportion?",
+    "options": {
+      "A": "Speed and time",
+      "B": "Weight and cost",
+      "C": "Distance and petrol used",
+      "D": "Books and pages"
+    },
+    "correct_answer": "A",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 34,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Direct and Inverse Proportions",
+    "topic": "Application of Direct Proportion",
+    "question_text": "If a train covers 100 km in 2 hours, how far will it go in 5 hours at the same speed?",
+    "options": {
+      "A": "200 km",
+      "B": "250 km",
+      "C": "300 km",
+      "D": "400 km"
+    },
+    "correct_answer": "B",
+    "difficulty": "Easy",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 35,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Direct and Inverse Proportions",
+    "topic": "Application of Inverse Proportion",
+    "question_text": "If 4 workers take 12 days to finish a job, how many days will 6 workers take?",
+    "options": {
+      "A": "6",
+      "B": "8",
+      "C": "9",
+      "D": "10"
+    },
+    "correct_answer": "B",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 36,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Direct and Inverse Proportions",
+    "topic": "Concept Check",
+    "question_text": "Which of the following shows direct proportion?",
+    "options": {
+      "A": "Speed and time",
+      "B": "Time and distance",
+      "C": "Number of workers and time",
+      "D": "Price and quantity bought"
+    },
+    "correct_answer": "D",
+    "difficulty": "Easy",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 37,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Direct and Inverse Proportions",
+    "topic": "Unitary Method",
+    "question_text": "If 7 pens cost ₹56, what is the cost of 1 pen?",
+    "options": {
+      "A": "₹7",
+      "B": "₹8",
+      "C": "₹9",
+      "D": "₹10"
+    },
+    "correct_answer": "B",
+    "difficulty": "Easy",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 38,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Direct and Inverse Proportions",
+    "topic": "Direct Proportion",
+    "question_text": "If x and y are in direct proportion, then x1/x2 = ?",
+    "options": {
+      "A": "y1/y2",
+      "B": "y2/y1",
+      "C": "x1/y1",
+      "D": "x2/y2"
+    },
+    "correct_answer": "A",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 39,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Direct and Inverse Proportions",
+    "topic": "Inverse Proportion",
+    "question_text": "In inverse proportion, the product xy is:",
+    "options": {
+      "A": "Zero",
+      "B": "Constant",
+      "C": "Increases",
+      "D": "Decreases"
+    },
+    "correct_answer": "B",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 40,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Direct and Inverse Proportions",
+    "topic": "Real Life Example",
+    "question_text": "Which of the following represents an inverse proportion situation?",
+    "options": {
+      "A": "More sugar, sweeter the juice",
+      "B": "More distance, more time",
+      "C": "More speed, less time",
+      "D": "More money, more items"
+    },
+    "correct_answer": "C",
+    "difficulty": "Easy",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 41,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Direct and Inverse Proportions",
+    "topic": "Calculation Based",
+    "question_text": "If 3 metres of cloth costs ₹270, find the cost of 7 metres.",
+    "options": {
+      "A": "₹540",
+      "B": "₹630",
+      "C": "₹810",
+      "D": "₹900"
+    },
+    "correct_answer": "B",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 42,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Direct and Inverse Proportions",
+    "topic": "Conceptual",
+    "question_text": "What happens to one quantity if the other increases in inverse proportion?",
+    "options": {
+      "A": "It also increases",
+      "B": "It remains the same",
+      "C": "It decreases",
+      "D": "It becomes zero"
+    },
+    "correct_answer": "C",
+    "difficulty": "Easy",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 43,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Direct and Inverse Proportions",
+    "topic": "Maps and Scale",
+    "question_text": "A map has a scale 1:100000. What actual distance does 5 cm represent?",
+    "options": {
+      "A": "5 km",
+      "B": "50 km",
+      "C": "500 km",
+      "D": "5000 km"
+    },
+    "correct_answer": "B",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 44,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Direct and Inverse Proportions",
+    "topic": "Graphs",
+    "question_text": "Which graph represents direct proportion?",
+    "options": {
+      "A": "A curve",
+      "B": "A horizontal line",
+      "C": "A straight line through origin",
+      "D": "A parabola"
+    },
+    "correct_answer": "C",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 45,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Direct and Inverse Proportions",
+    "topic": "Check Understanding",
+    "question_text": "Two variables x and y are said to be in inverse proportion when:",
+    "options": {
+      "A": "x/y is constant",
+      "B": "x × y is constant",
+      "C": "x + y is constant",
+      "D": "x – y is constant"
+    },
+    "correct_answer": "B",
+    "difficulty": "Hard",
+    "question_type": "MCQ"
+  },
+  
+  {
+    "id": 46,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Exponents and Powers",
+    "topic": "Meaning of Exponents",
+    "question_text": "What does 10⁴ represent?",
+    "options": { "A": "10 + 4", "B": "10 × 4", "C": "10000", "D": "104" },
+    "correct_answer": "C",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 47,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Exponents and Powers",
+    "topic": "Negative Exponents",
+    "question_text": "What is the value of 2⁻²?",
+    "options": { "A": "4", "B": "1/4", "C": "-4", "D": "2" },
+    "correct_answer": "B",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 48,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Exponents and Powers",
+    "topic": "Zero Exponent",
+    "question_text": "What is the value of any non-zero number raised to the power 0?",
+    "options": { "A": "0", "B": "1", "C": "The number itself", "D": "Undefined" },
+    "correct_answer": "B",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 49,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Exponents and Powers",
+    "topic": "Law of Exponents",
+    "question_text": "According to the law of exponents, a³ × a² = ?",
+    "options": { "A": "a⁵", "B": "a⁶", "C": "a⁹", "D": "a¹" },
+    "correct_answer": "A",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 50,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Exponents and Powers",
+    "topic": "Law of Exponents",
+    "question_text": "According to the law of exponents, a⁵ ÷ a² = ?",
+    "options": { "A": "a²", "B": "a³", "C": "a⁷", "D": "a¹⁰" },
+    "correct_answer": "B",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 51,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Exponents and Powers",
+    "topic": "Power of Power",
+    "question_text": "What is (2³)² equal to?",
+    "options": { "A": "2⁶", "B": "2⁵", "C": "6²", "D": "9" },
+    "correct_answer": "A",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 52,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Exponents and Powers",
+    "topic": "Negative Power Rule",
+    "question_text": "Simplify (−3)⁰",
+    "options": { "A": "0", "B": "1", "C": "-1", "D": "3" },
+    "correct_answer": "B",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 53,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Exponents and Powers",
+    "topic": "Exponent Comparison",
+    "question_text": "Which is greater: 2⁵ or 5²?",
+    "options": { "A": "2⁵", "B": "5²", "C": "Equal", "D": "Cannot be determined" },
+    "correct_answer": "A",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 54,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Exponents and Powers",
+    "topic": "Expanded Form",
+    "question_text": "Write 1025.63 in expanded form using powers of 10.",
+    "options": {
+      "A": "1×10³ + 0×10² + 2×10¹ + 5×10⁰ + 6×10⁻¹ + 3×10⁻²",
+      "B": "1025 + 0.63",
+      "C": "10×100 + 25 + 0.63",
+      "D": "1×10² + 25.63"
+    },
+    "correct_answer": "A",
+    "difficulty": "Hard",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 55,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Exponents and Powers",
+    "topic": "Scientific Notation",
+    "question_text": "Which of the following is the scientific form of 4050000?",
+    "options": {
+      "A": "4.05 × 10⁶", "B": "40.5 × 10⁵", "C": "405 × 10⁴", "D": "None"
+    },
+    "correct_answer": "A",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 56,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Exponents and Powers",
+    "topic": "Scientific Notation",
+    "question_text": "Express 0.000035 in standard form.",
+    "options": {
+      "A": "3.5 × 10⁻⁵", "B": "0.35 × 10⁻⁴", "C": "35 × 10⁻⁶", "D": "0.000035 × 10⁰"
+    },
+    "correct_answer": "A",
+    "difficulty": "Hard",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 57,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Exponents and Powers",
+    "topic": "Law of Exponents",
+    "question_text": "Which of the following is true?",
+    "options": {
+      "A": "a⁰ = 0", "B": "a⁻ⁿ = 1/aⁿ", "C": "aⁿ × a⁻ⁿ = 0", "D": "aⁿ = a × n"
+    },
+    "correct_answer": "B",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 58,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Exponents and Powers",
+    "topic": "Negative Exponents",
+    "question_text": "What is 10⁻³ equal to?",
+    "options": {
+      "A": "1/100", "B": "1000", "C": "1/1000", "D": "0"
+    },
+    "correct_answer": "C",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 59,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Exponents and Powers",
+    "topic": "Law of Indices",
+    "question_text": "Simplify 3⁻⁵ × 3²",
+    "options": {
+      "A": "3⁷", "B": "3⁻³", "C": "3³", "D": "3⁻¹⁰"
+    },
+    "correct_answer": "B",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 60,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Exponents and Powers",
+    "topic": "Exponent Properties",
+    "question_text": "Which law is used in (a⁵)³ = a¹⁵?",
+    "options": {
+      "A": "Power of a product", "B": "Power of a power", "C": "Multiplication of powers", "D": "Division of powers"
+    },
+    "correct_answer": "B",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+    {
+    "id": 61,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Playing with Numbers",
+    "topic": "Number Patterns and Divisibility",
+    "question_text": "Generalised form of a four-digit number abdc is",
+    "options": {
+      "A": "1000a + 100b + 10c + d",
+      "B": "1000a + 100c + 10b + d",
+      "C": "1000a + 100b + 10d + c",
+      "D": "1000c + 100b + 10d + a"
+    },
+    "correct_answer": "C",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 62,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Playing with Numbers",
+    "topic": "Number Patterns and Divisibility",
+    "question_text": "Generalised form of a two-digit number xy is",
+    "options": {
+      "A": "x + y",
+      "B": "10x + y",
+      "C": "10x - y",
+      "D": "10y + x"
+    },
+    "correct_answer": "B",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 63,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Playing with Numbers",
+    "topic": "Number Patterns and Divisibility",
+    "question_text": "The usual form of 1000a + 10b + c is",
+    "options": {
+      "A": "abc",
+      "B": "abco",
+      "C": "aobc",
+      "D": "aboc"
+    },
+    "correct_answer": "A",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 64,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Playing with Numbers",
+    "topic": "Number Patterns and Divisibility",
+    "question_text": "Let abc be a three-digit number. Then abc \u2013 cba is not divisible by",
+    "options": {
+      "A": "9",
+      "B": "11",
+      "C": "18",
+      "D": "33"
+    },
+    "correct_answer": "C",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 65,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Playing with Numbers",
+    "topic": "Number Patterns and Divisibility",
+    "question_text": "The sum of all the numbers formed by the digits x, y and z of the number xyz is divisible by",
+    "options": {
+      "A": "11",
+      "B": "33",
+      "C": "37",
+      "D": "74"
+    },
+    "correct_answer": "C",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 66,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Playing with Numbers",
+    "topic": "Number Patterns and Divisibility",
+    "question_text": "A four-digit number aabb is divisible by 55. Then possible value(s) of b is/are",
+    "options": {
+      "A": "0 and 2",
+      "B": "2 and 5",
+      "C": "0 and 5",
+      "D": "7"
+    },
+    "correct_answer": "C",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 67,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Playing with Numbers",
+    "topic": "Number Patterns and Divisibility",
+    "question_text": "Let abc be a three digit number. Then abc + bca + cab is not divisible by",
+    "options": {
+      "A": "a + b + c",
+      "B": "3",
+      "C": "37",
+      "D": "9"
+    },
+    "correct_answer": "A",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 68,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Playing with Numbers",
+    "topic": "Number Patterns and Divisibility",
+    "question_text": "A four-digit number 4ab5 is divisible by 55. Then the value of b \u2013 a is",
+    "options": {
+      "A": "0",
+      "B": "1",
+      "C": "4",
+      "D": "5"
+    },
+    "correct_answer": "C",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 69,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Playing with Numbers",
+    "topic": "Number Patterns and Divisibility",
+    "question_text": "If abc is a three-digit number, then the number abc \u2013 a \u2013 b \u2013 c is divisible by",
+    "options": {
+      "A": "9",
+      "B": "90",
+      "C": "10",
+      "D": "11"
+    },
+    "correct_answer": "B",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 70,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Playing with Numbers",
+    "topic": "Number Patterns and Divisibility",
+    "question_text": "A six-digit number formed by repeating a three-digit number is divisible by",
+    "options": {
+      "A": "7 only",
+      "B": "11 only",
+      "C": "13 only",
+      "D": "1001"
+    },
+    "correct_answer": "D",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 71,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Playing with Numbers",
+    "topic": "Number Patterns and Divisibility",
+    "question_text": "If the sum of digits of a number is divisible by 3, then the number is always divisible by",
+    "options": {
+      "A": "2",
+      "B": "3",
+      "C": "6",
+      "D": "9"
+    },
+    "correct_answer": "B",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 72,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Playing with Numbers",
+    "topic": "Number Patterns and Divisibility",
+    "question_text": "If x + y + z = 6 and z is an odd digit, then the number xyz is",
+    "options": {
+      "A": "an odd multiple of 3",
+      "B": "odd multiple of 6",
+      "C": "even multiple of 3",
+      "D": "even multiple of 9"
+    },
+    "correct_answer": "A",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 73,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Playing with Numbers",
+    "topic": "Number Patterns and Divisibility",
+    "question_text": "If 5A + B3 = 65, then the value of A and B is",
+    "options": {
+      "A": "A = 2, B = 3",
+      "B": "A = 3, B = 2",
+      "C": "A = 2, B = 1",
+      "D": "A = 1, B = 2"
+    },
+    "correct_answer": "A",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 74,
+    "class_level": 8,
+    "subject": "Mathematics",
+    "chapter": "Playing with Numbers",
+    "topic": "Number Patterns and Divisibility",
+    "question_text": "If A3 + 8B = 150, then the value of A + B is",
+    "options": {
+      "A": "13",
+      "B": "12",
+      "C": "17",
+      "D": "15"
+    },
+    "correct_answer": "C",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  }
+]
