@@ -244,24 +244,8 @@ else:
             st.rerun()
         
         st.sidebar.markdown("### 🤝 Social Learning")
-        if st.sidebar.button("🔖 My Bookmarks", use_container_width=True):
-            st.session_state.page = "bookmarks"
-            st.rerun()
-        
-        if st.sidebar.button("🏆 Leaderboard", use_container_width=True):
-            st.session_state.page = "leaderboard"
-            st.rerun()
-        
-        if st.sidebar.button("🏅 Achievements", use_container_width=True):
-            st.session_state.page = "badges"
-            st.rerun()
-        
         if st.sidebar.button("👥 Study Groups", use_container_width=True):
             st.session_state.page = "study_groups"
-            st.rerun()
-        
-        if st.sidebar.button("🔍 Debug Bookmarks", use_container_width=True):
-            st.session_state.page = "debug_bookmarks"
             st.rerun()
     
     elif st.session_state.role == "teacher":
@@ -509,28 +493,6 @@ if st.session_state.user and st.session_state.role == "student" and "quiz_questi
             col1, col2 = st.columns([4, 1])
             with col1:
                 st.markdown(f"**Q{i+1}. {q['question_text']}**")
-            with col2:
-                # Bookmark button
-                from utils.social_features import is_question_bookmarked
-                question_id = q.get('id', i)
-                student_id = st.session_state.user.user.id
-                
-                # Check if question is already bookmarked
-                is_bookmarked = is_question_bookmarked(student_id, question_id)
-                
-                bookmark_key = f"bookmark_{question_id}"
-                bookmark_label = "✅" if is_bookmarked else "🔖"
-                bookmark_help = "Question already bookmarked" if is_bookmarked else "Bookmark this question for later review"
-                
-                if st.button(bookmark_label, key=bookmark_key, help=bookmark_help, disabled=is_bookmarked):
-                    from utils.social_features import bookmark_question
-                    if bookmark_question(student_id, question_id, q['question_text']):
-                        st.success("Question bookmarked!")
-                        time.sleep(1)  # Show success message for 1 second
-                        st.rerun()
-                    else:
-                        st.error("Failed to bookmark question")
-
             # Show options
             options = q["options"]
             chosen = st.radio(
@@ -664,16 +626,6 @@ if st.session_state.user and st.session_state.role == "teacher":
             st.session_state.pop("page")
             st.rerun()
     
-    # Handle social learning pages for students
-    if st.session_state.get("page") == "bookmarks":
-        st.title("🔖 My Bookmarks")
-        from utils.social_ui import show_bookmarks_page
-        show_bookmarks_page(st.session_state.user.user.id)
-
-        if st.button("Back to Dashboard"):
-            st.session_state.pop("page")
-            st.rerun()
-    
     # Handle study material page
     if st.session_state.get("page") == "study_material":
         st.title("📚 Study Material")
@@ -697,35 +649,10 @@ if st.session_state.user and st.session_state.role == "teacher":
             st.session_state.pop("study_chapter", None)
             st.rerun()
     
-    if st.session_state.get("page") == "leaderboard":
-        st.title("🏆 Class Leaderboard")
-        from utils.social_ui import show_leaderboard_page
-        show_leaderboard_page()
-
-        if st.button("Back to Dashboard"):
-            st.session_state.pop("page")
-            st.rerun()
-    
-    if st.session_state.get("page") == "badges":
-        st.title("🏅 My Achievements")
-        from utils.social_ui import show_badges_page
-        show_badges_page(st.session_state.user.user.id)
-
-        if st.button("Back to Dashboard"):
-            st.session_state.pop("page")
-            st.rerun()
-    
     if st.session_state.get("page") == "study_groups":
         st.title("👥 Study Groups")
         from utils.social_ui import show_study_groups_page
         show_study_groups_page(st.session_state.user.user.id)
-
-        if st.button("Back to Dashboard"):
-            st.session_state.pop("page")
-            st.rerun()
-    
-    if st.session_state.get("page") == "debug_bookmarks":
-        import debug_bookmarks_simple
 
         if st.button("Back to Dashboard"):
             st.session_state.pop("page")
