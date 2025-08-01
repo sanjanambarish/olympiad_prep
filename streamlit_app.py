@@ -13,6 +13,50 @@ import os
 st.set_page_config(page_title="Olympiad Prep", page_icon="🧠")
 st.title("🧠 Olympiad Preparation Platform")
 
+# =============================
+# About Us Section
+# =============================
+# Adding custom CSS for hover effects
+st.markdown("""
+<style>
+.about-container {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #e6e6e6;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.about-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    border-color: #4CAF50;
+}
+
+.about-title {
+    transition: color 0.3s ease;
+}
+
+.about-container:hover .about-title {
+    color: #4CAF50;
+}
+</style>
+""", unsafe_allow_html=True)
+
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    with st.container():
+        st.markdown('<div class="about-container"><h3 class="about-title">🎯 Our Mission</h3><p>We aim to provide comprehensive Olympiad preparation resources for students, helping them excel in competitive mathematics examinations.</p></div>', unsafe_allow_html=True)
+
+with col2:
+    with st.container():
+        st.markdown('<div class="about-container"><h3 class="about-title">👥 Our Approach</h3><p>Our platform combines interactive quizzes, video resources, and collaborative learning tools to create an engaging educational experience.</p></div>', unsafe_allow_html=True)
+
+with col3:
+    with st.container():
+        st.markdown('<div class="about-container"><h3 class="about-title">🌟 Why Choose Us</h3><p>Personalized learning paths, real-time progress tracking, and expert-curated content designed specifically for Olympiad success.</p></div>', unsafe_allow_html=True)
+
 # Initialize session state
 if "user" not in st.session_state:
     st.session_state.user = None
@@ -38,12 +82,145 @@ if st.session_state.user:
 # AUTHENTICATION: Login / Sign Up
 # =============================
 if not st.session_state.user:
-    menu = st.sidebar.radio("🔐 Menu", [
-        "Student Login", 
-        "Student Sign Up", 
-        "Teacher Login",
-        "Teacher Sign Up"
-    ])
+    st.sidebar.markdown("### 👤 User Authentication")
+    
+    # Create tabs for better organization
+    auth_option = st.sidebar.selectbox("Choose an option:", ["Login", "Sign Up"])
+    
+    if auth_option == "Login":
+        login_type = st.sidebar.radio("Login as:", ["Student", "Teacher"])
+        
+        if login_type == "Student":
+            st.sidebar.markdown("#### 🎓 Student Login")
+            with st.sidebar.form("student_login_form"):
+                st.markdown("🔐 Secure login for students")
+                email = st.text_input("Email", placeholder="student@example.com")
+                password = st.text_input("Password", type="password", placeholder="••••••••")
+                login_submitted = st.form_submit_button("Login as Student", use_container_width=True)
+                
+                if login_submitted:
+                    if not email or not password:
+                        st.error("⚠️ Please enter both email and password")
+                    else:
+                        try:
+                            with st.spinner("Logging in..."):
+                                user = supabase.auth.sign_in_with_password({"email": email, "password": password})
+                                st.session_state.user = user
+                                st.session_state.role = "student"
+                                st.success("✅ Successfully logged in as Student!")
+                                time.sleep(1)
+                                st.rerun()
+                        except Exception as e:
+                            st.error(f"❌ Login failed: {str(e)}")
+        
+        elif login_type == "Teacher":
+            st.sidebar.markdown("#### 👩‍🏫 Teacher Login")
+            with st.sidebar.form("teacher_login_form"):
+                st.markdown("🔐 Secure login for teachers")
+                email = st.text_input("Email ", placeholder="teacher@school.edu")
+                password = st.text_input("Password ", type="password", placeholder="••••••••")
+                login_submitted = st.form_submit_button("Login as Teacher", use_container_width=True)
+                
+                if login_submitted:
+                    if not email or not password:
+                        st.error("⚠️ Please enter both email and password")
+                    else:
+                        try:
+                            with st.spinner("Verifying credentials..."):
+                                user = supabase.auth.sign_in_with_password({"email": email, "password": password})
+                                result = supabase.table("users").select("role").eq("id", user.user.id).execute()
+                                if result.data and result.data[0]["role"] == "teacher":
+                                    st.session_state.user = user
+                                    st.session_state.role = "teacher"
+                                    st.success("✅ Teacher successfully logged in!")
+                                    time.sleep(1)
+                                    st.rerun()
+                                else:
+                                    st.error("⚠️ You are not authorized as a teacher. Please contact admin.")
+                        except Exception as e:
+                            st.error(f"❌ Login failed: {str(e)}")
+    
+    elif auth_option == "Sign Up":
+        signup_type = st.sidebar.radio("Sign up as:", ["Student", "Teacher"])
+        
+        if signup_type == "Student":
+            st.sidebar.markdown("#### 📝 Student Registration")
+            with st.sidebar.form("student_signup_form"):
+                st.markdown("🎓 Join our learning platform")
+                email = st.text_input("Email", placeholder="student@example.com")
+                password = st.text_input("Password", type="password", placeholder="At least 6 characters")
+                full_name = st.text_input("Full Name", placeholder="Your full name")
+                student_class = st.selectbox("Class", [8, 9, 10], help="Select your current class")
+                signup_submitted = st.form_submit_button("Register as Student", use_container_width=True)
+                
+                if signup_submitted:
+                    if not email or not password or not full_name:
+                        st.error("⚠️ Please fill all required fields")
+                    elif len(password) < 6:
+                        st.error("⚠️ Password must be at least 6 characters long")
+                    elif "@" not in email or "." not in email:
+                        st.error("⚠️ Please enter a valid email address")
+                    else:
+                        try:
+                            with st.spinner("Creating your account..."):
+                                response = supabase.auth.sign_up({
+                                    "email": email,
+                                    "password": password,
+                                    "options": {
+                                        "data": {
+                                            "full_name": full_name,
+                                            "class": student_class
+                                        }
+                                    }
+                                })
+                                st.success("✅ Registration successful! Please check your email for verification link.")
+                                st.info("💡 Tip: Check your spam folder if you don't see the email")
+                        except Exception as e:
+                            st.error(f"❌ Registration failed: {str(e)}")
+        
+        elif signup_type == "Teacher":
+            st.sidebar.markdown("#### 🔐 Teacher Registration")
+            with st.sidebar.form("teacher_signup_form"):
+                st.markdown("👩‍🏫 Join our teaching community")
+                email = st.text_input("Institution Email", placeholder="teacher@school.edu")
+                password = st.text_input("Password", type="password", placeholder="At least 6 characters")
+                full_name = st.text_input("Full Name", placeholder="Your full name")
+                secret_code = st.text_input("Registration Code", type="password", placeholder="Enter teacher registration code")
+                signup_submitted = st.form_submit_button("Register as Teacher", use_container_width=True)
+                
+                if signup_submitted:
+                    if not email or not password or not full_name or not secret_code:
+                        st.error("⚠️ Please fill all required fields")
+                    elif len(password) < 6:
+                        st.error("⚠️ Password must be at least 6 characters long")
+                    elif secret_code != "MATH2025":
+                        st.error("⚠️ Invalid registration code. Please contact admin for the correct code.")
+                    elif not email.endswith((".edu", ".ac.in", "school", "k12")) and "teacher" not in email.lower():
+                        st.warning("⚠️ Please use an institutional email address (e.g., @school.edu)")
+                    elif "@" not in email or "." not in email:
+                        st.error("⚠️ Please enter a valid email address")
+                    else:
+                        try:
+                            with st.spinner("Creating your teacher account..."):
+                                # Sign up via Supabase Auth
+                                response = supabase.auth.sign_up({
+                                    "email": email,
+                                    "password": password,
+                                    "options": {
+                                        "data": {
+                                            "full_name": full_name
+                                        }
+                                    }
+                                })
+                                if response.user:
+                                    # Update role to 'teacher' in public.users
+                                    supabase.table("users").update({"role": "teacher"}).eq("id", response.user.id).execute()
+                                    st.success("✅ Teacher registration successful! Please check your email for verification link.")
+                                    st.info("💡 Tip: Check your spam folder if you don't see the email")
+                                else:
+                                    st.info("Check your email for verification (optional)")
+                        except Exception as e:
+                            st.error(f"❌ Registration failed: {str(e)}")
 else:
     # Quick Access Dashboard for logged-in users
     st.sidebar.markdown("### 🚀 Quick Access")
@@ -99,111 +276,6 @@ else:
             st.rerun()
     
     st.sidebar.divider()
-    menu = None  # Skip menu for logged-in users
-
-# 0. TEACHER SIGN UP (Admin-Controlled)
-if menu == "Teacher Sign Up":
-    st.subheader("🔐 Register as Teacher")
-    with st.form("teacher_signup_form"):
-        email = st.text_input("Institution Email (e.g., @school.edu)")
-        password = st.text_input("Password", type="password")
-        full_name = st.text_input("Full Name")
-        secret_code = st.text_input("Registration Code", type="password")
-        submitted = st.form_submit_button("Register as Teacher")
-
-        if submitted:
-            if not email or not password or not full_name or not secret_code:
-                st.error("Please fill all fields")
-            elif len(password) < 6:
-                st.error("Password must be at least 6 characters")
-            elif secret_code != "MATH2025":  # ← Change this to your preferred code
-                st.error("Invalid registration code")
-            elif not email.endswith((".edu", ".ac.in", "school", "k12")) and "teacher" not in email.lower():
-                st.warning("Please use an institutional email")
-            else:
-                try:
-                    # Sign up via Supabase Auth
-                    response = supabase.auth.sign_up({
-                        "email": email,
-                        "password": password,
-                        "options": {
-                            "data": {
-                                "full_name": full_name
-                            }
-                        }
-                    })
-                    if response.user:
-                        # Update role to 'teacher' in public.users
-                        supabase.table("users").update({"role": "teacher"}).eq("id", response.user.id).execute()
-                        st.success("✅ Teacher registration successful! You can now login.")
-                    else:
-                        st.info("Check your email (optional)")
-                except Exception as e:
-                    st.error(f"Error: {str(e)}")
-# 1. STUDENT SIGN UP
-if menu == "Student Sign Up":
-    st.subheader("📝 Register as Student")
-    with st.form("signup_form"):
-        email = st.text_input("Email")
-        password = st.text_input("Password", type="password")
-        full_name = st.text_input("Full Name")
-        student_class = st.selectbox("Class", [8, 9, 10])
-        submitted = st.form_submit_button("Register")
-
-        if submitted:
-            if not email or not password or not full_name:
-                st.error("Please fill all fields")
-            elif len(password) < 6:
-                st.error("Password must be at least 6 characters")
-            else:
-                try:
-                    response = supabase.auth.sign_up({
-                        "email": email,
-                        "password": password,
-                        "options": {
-                            "data": {
-                                "full_name": full_name,
-                                "class": student_class
-                            }
-                        }
-                    })
-                    st.success("✅ Registration successful! Please login.")
-                except Exception as e:
-                    st.error(f"Error: {str(e)}")
-
-# 2. STUDENT LOGIN
-elif menu == "Student Login":
-    st.subheader("🎓 Student Login")
-    email = st.text_input("Email")
-    password = st.text_input("Password", type="password")
-    if st.button("Login"):
-        try:
-            user = supabase.auth.sign_in_with_password({"email": email, "password": password})
-            st.session_state.user = user
-            st.session_state.role = "student"
-            st.success("Logged in as Student!")
-            st.rerun()
-        except Exception as e:
-            st.error(f"Login failed: {str(e)}")
-
-# 3. TEACHER LOGIN
-elif menu == "Teacher Login":
-    st.subheader("👩‍🏫 Teacher Login")
-    email = st.text_input("Email")
-    password = st.text_input("Password", type="password")
-    if st.button("Login"):
-        try:
-            user = supabase.auth.sign_in_with_password({"email": email, "password": password})
-            result = supabase.table("users").select("role").eq("id", user.user.id).execute()
-            if result.data and result.data[0]["role"] == "teacher":
-                st.session_state.user = user
-                st.session_state.role = "teacher"
-                st.success("Teacher logged in!")
-                st.rerun()
-            else:
-                st.error("You are not authorized as a teacher.")
-        except Exception as e:
-            st.error(f"Login failed: {str(e)}")
 
 # =============================
 # PAGE ROUTING SYSTEM
@@ -300,7 +372,7 @@ if st.session_state.user and st.session_state.role == "student":
             all_chapters = [
                 "Linear Equations in One Variable",
                 "Mensuration", "Data Handling", "Exponents and Powers",  "Playing with numbers"
-            ]
+            ,"Number Systems"]
 
         selected_chapter = st.selectbox("Select Chapter", all_chapters, key="chapter_selector")
 
@@ -532,19 +604,6 @@ if st.session_state.user and st.session_state.role == "student" and "quiz_questi
             st.markdown(f"- Time Taken: ⏱️ {time_text}")
             st.markdown("---")
     
-    # Discussion Forum
-    st.markdown("### 💬 Discuss This Quiz")
-    st.info("Discuss questions with your classmates in the forum below!")
-    from utils.social_ui import show_discussion_forum
-    # Show discussion forum for the first question as an example
-    if questions:
-        first_question = questions[0]
-        show_discussion_forum(
-            first_question.get('id', 0), 
-            first_question['question_text'], 
-            st.session_state.user.user.id, 
-            st.session_state.user.user.email.split('@')[0]
-        )
 # =============================
 # DOUBT BOX - STUDENT
 # =============================

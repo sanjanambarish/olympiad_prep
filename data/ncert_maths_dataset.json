@@ -1201,5 +1201,362 @@
     "correct_answer": "C",
     "difficulty": "Medium",
     "question_type": "MCQ"
+  },
+  {
+    "id": 75,
+    "class_level": 9,
+    "subject": "Mathematics",
+    "chapter": "Number Systems",
+    "topic": "Rational Numbers",
+    "question_text": "Every rational number is",
+    "options": {
+      "A": "a natural number",
+      "B": "an integer",
+      "C": "a real number",
+      "D": "a whole number"
+    },
+    "correct_answer": "C",
+    "difficulty": "Easy",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 76,
+    "class_level": 9,
+    "subject": "Mathematics",
+    "chapter": "Number Systems",
+    "topic": "Rational Numbers",
+    "question_text": "Between two rational numbers",
+    "options": {
+      "A": "there is no rational number",
+      "B": "there is exactly one rational number",
+      "C": "there are infinitely many rational numbers",
+      "D": "there are only rational numbers and no irrational numbers"
+    },
+    "correct_answer": "C",
+    "difficulty": "Easy",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 77,
+    "class_level": 9,
+    "subject": "Mathematics",
+    "chapter": "Number Systems",
+    "topic": "Decimal Representation",
+    "question_text": "Decimal representation of a rational number cannot be",
+    "options": {
+      "A": "terminating",
+      "B": "non-terminating",
+      "C": "non-terminating repeating",
+      "D": "non-terminating non-repeating"
+    },
+    "correct_answer": "D",
+    "difficulty": "Easy",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 78,
+    "class_level": 9,
+    "subject": "Mathematics",
+    "chapter": "Number Systems",
+    "topic": "Irrational Numbers",
+    "question_text": "The product of any two irrational numbers is",
+    "options": {
+      "A": "always an irrational number",
+      "B": "always a rational number",
+      "C": "always an integer",
+      "D": "sometimes rational, sometimes irrational"
+    },
+    "correct_answer": "D",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 79,
+    "class_level": 9,
+    "subject": "Mathematics",
+    "chapter": "Number Systems",
+    "topic": "Decimal Expansion",
+    "question_text": "The decimal expansion of the number √2 is",
+    "options": {
+      "A": "a finite decimal",
+      "B": "1.41421",
+      "C": "non-terminating recurring",
+      "D": "non-terminating non-recurring"
+    },
+    "correct_answer": "D",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 80,
+    "class_level": 9,
+    "subject": "Mathematics",
+    "chapter": "Number Systems",
+    "topic": "Identifying Irrationals",
+    "question_text": "Which of the following is irrational?",
+    "options": {
+      "A": "4/9",
+      "B": "√12 / 3",
+      "C": "7",
+      "D": "√81"
+    },
+    "correct_answer": "C",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 81,
+    "class_level": 9,
+    "subject": "Mathematics",
+    "chapter": "Number Systems",
+    "topic": "Identifying Irrationals",
+    "question_text": "Which of the following is irrational?",
+    "options": {
+      "A": "0.14",
+      "B": "0.1416",
+      "C": "0.1416",
+      "D": "0.4014001400014..."
+    },
+    "correct_answer": "D",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 82,
+    "class_level": 9,
+    "subject": "Mathematics",
+    "chapter": "Number Systems",
+    "topic": "Rational Number Between",
+    "question_text": "A rational number between √2 and √3 is",
+    "options": {
+      "A": "(√2 + √3)/2",
+      "B": "√2 × √3 / 2",
+      "C": "1.5",
+      "D": "1.8"
+    },
+    "correct_answer": "A",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 83,
+    "class_level": 9,
+    "subject": "Mathematics",
+    "chapter": "Number Systems",
+    "topic": "Decimal Expansion",
+    "question_text": "The value of 1.999... in the form p/q is",
+    "options": {
+      "A": "19/10",
+      "B": "1999/1000",
+      "C": "2",
+      "D": "1/9"
+    },
+    "correct_answer": "C",
+    "difficulty": "Easy",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 84,
+    "class_level": 9,
+    "subject": "Mathematics",
+    "chapter": "Number Systems",
+    "topic": "Surds and Simplification",
+    "question_text": "√2 + √3 is equal to",
+    "options": {
+      "A": "2√6",
+      "B": "6",
+      "C": "3√3",
+      "D": "4√6"
+    },
+    "correct_answer": "A",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 85,
+    "class_level": 9,
+    "subject": "Mathematics",
+    "chapter": "Number Systems",
+    "topic": "Surds and Simplification",
+    "question_text": "√10 × √15 is equal to",
+    "options": {
+      "A": "6√5",
+      "B": "5√6",
+      "C": "25",
+      "D": "10√5"
+    },
+    "correct_answer": "A",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 86,
+    "class_level": 9,
+    "subject": "Mathematics",
+    "chapter": "Number Systems",
+    "topic": "Rationalising the Denominator",
+    "question_text": "The number obtained on rationalising the denominator of 1/(√7 - √2) is",
+    "options": {
+      "A": "√7 + √2 / 3",
+      "B": "√7 - √2 / 3",
+      "C": "(√7 + √2) / 5",
+      "D": "(√7 + √2) / 45"
+    },
+    "correct_answer": "A",
+    "difficulty": "Hard",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 87,
+    "class_level": 9,
+    "subject": "Mathematics",
+    "chapter": "Number Systems",
+    "topic": "Rationalising the Denominator",
+    "question_text": "1/(√9 - √8) is equal to",
+    "options": {
+      "A": "1 / (3 - 2√2)",
+      "B": "1 / (3 + 2√2)",
+      "C": "3 - 2√2",
+      "D": "3 + 2√2"
+    },
+    "correct_answer": "D",
+    "difficulty": "Hard",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 88,
+    "class_level": 9,
+    "subject": "Mathematics",
+    "chapter": "Number Systems",
+    "topic": "Rationalising the Denominator",
+    "question_text": "After rationalising the denominator of 7 / (3√3 - 2√2), we get the denominator as",
+    "options": {
+      "A": "13",
+      "B": "19",
+      "C": "5",
+      "D": "35"
+    },
+    "correct_answer": "B",
+    "difficulty": "Hard",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 89,
+    "class_level": 9,
+    "subject": "Mathematics",
+    "chapter": "Number Systems",
+    "topic": "Simplification",
+    "question_text": "The value of (√32 + √48) / (√8 + √12) is",
+    "options": {
+      "A": "2",
+      "B": "√2",
+      "C": "4",
+      "D": "8"
+    },
+    "correct_answer": "C",
+    "difficulty": "Hard",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 90,
+    "class_level": 9,
+    "subject": "Mathematics",
+    "chapter": "Number Systems",
+    "topic": "Decimal and Surd",
+    "question_text": "If √2 = 1.4142, then (√2 - 1) / (√2 + 1) is equal to",
+    "options": {
+      "A": "2.4142",
+      "B": "5.8282",
+      "C": "0.4142",
+      "D": "0.1718"
+    },
+    "correct_answer": "D",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 91,
+    "class_level": 9,
+    "subject": "Mathematics",
+    "chapter": "Number Systems",
+    "topic": "Surds",
+    "question_text": "4√3 - 2√2 equals",
+    "options": {
+      "A": "1 / √62",
+      "B": "2 - √6",
+      "C": "1 / √62",
+      "D": "2√6"
+    },
+    "correct_answer": "B",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 92,
+    "class_level": 9,
+    "subject": "Mathematics",
+    "chapter": "Number Systems",
+    "topic": "Surds",
+    "question_text": "The product √3 × √4 × √12 × √2 × √32 equals",
+    "options": {
+      "A": "2",
+      "B": "√2",
+      "C": "12√2",
+      "D": "12√32"
+    },
+    "correct_answer": "C",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 93,
+    "class_level": 9,
+    "subject": "Mathematics",
+    "chapter": "Number Systems",
+    "topic": "Laws of Exponents",
+    "question_text": "The value of (√24 / √81) is",
+    "options": {
+      "A": "1/9",
+      "B": "1/3",
+      "C": "9",
+      "D": "1/81"
+    },
+    "correct_answer": "B",
+    "difficulty": "Medium",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 94,
+    "class_level": 9,
+    "subject": "Mathematics",
+    "chapter": "Number Systems",
+    "topic": "Exponents",
+    "question_text": "Value of (256)^0.16 × (256)^0.09 is",
+    "options": {
+      "A": "4",
+      "B": "16",
+      "C": "64",
+      "D": "256.25"
+    },
+    "correct_answer": "C",
+    "difficulty": "Hard",
+    "question_type": "MCQ"
+  },
+  {
+    "id": 95,
+    "class_level": 9,
+    "subject": "Mathematics",
+    "chapter": "Number Systems",
+    "topic": "Laws of Exponents",
+    "question_text": "Which of the following is equal to x?",
+    "options": {
+      "A": "12^5 / 7^7 - x^x",
+      "B": "(1 / 4)^12 × 3^x",
+      "C": "(3)^2 × 3^3",
+      "D": "12^7 / 7^12 × x^x"
+    },
+    "correct_answer": "C",
+    "difficulty": "Hard",
+    "question_type": "MCQ"
   }
 ]
