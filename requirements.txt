@@ -8,3 +8,4 @@ openpyxl
 xlsxwriter
 python-dotenv
 google-generativeai
+openai
