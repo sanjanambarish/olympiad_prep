@@ -6,4 +6,5 @@ matplotlib
 plotly
 openpyxl
 xlsxwriter
-python-dotenv  # for managing keys later
+python-dotenv
+google-generativeai
