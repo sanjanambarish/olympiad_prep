@@ -2,10 +2,9 @@ streamlit
 supabase
 matplotlib
 pandas
-matplotlib
 plotly
 openpyxl
-xlsxwriter
-python-dotenv  # for managing keys later
+XlsxWriter
+python-dotenv
 google-generativeai
 openai
