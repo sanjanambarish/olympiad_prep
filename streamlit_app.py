@@ -390,8 +390,8 @@ if st.session_state.user and st.session_state.role == "student":
                     st.success("Quiz resumed!")
                     st.rerun()
         
-        # Add buttons for both starting quiz and studying material
-        col1, col2 = st.columns(2)
+        # Add buttons for starting quiz, sample papers, and studying material
+        col1, col2, col3 = st.columns(3)
         
         with col1:
             # Create download button for study material PDF
@@ -418,6 +418,24 @@ if st.session_state.user and st.session_state.role == "student":
                     st.rerun()
         
         with col2:
+            # Sample Paper buttons for each class
+            sample_paper_file = f"data/CMO-Sample-Paper-for-Class-{selected_class}.pdf"
+            sample_paper_filename = f"CMO-Sample-Paper-for-Class-{selected_class}.pdf"
+            
+            if os.path.exists(sample_paper_file):
+                with open(sample_paper_file, "rb") as f:
+                    sample_paper_data = f.read()
+                st.download_button(
+                    label=f"📝 Class {selected_class} Sample Paper (PDF)",
+                    data=sample_paper_data,
+                    file_name=sample_paper_filename,
+                    mime="application/pdf",
+                    key=f"sample_paper_{selected_class}"
+                )
+            else:
+                st.warning(f"Sample paper for Class {selected_class} not found.")
+        
+        with col3:
             if st.button("🚀 Start New Quiz"):
                 from utils.enhanced_quiz import load_questions_with_filters, clear_quiz_progress
                 
@@ -440,6 +458,15 @@ if st.session_state.user and st.session_state.role == "student":
                             "difficulty": difficulty,
                             "count": len(questions)
                         }
+                        
+                        # Initialize question-specific session state
+                        for i in range(len(questions)):
+                            st.session_state[f"started_{i}"] = False
+                            st.session_state[f"answered_{i}"] = False
+                            st.session_state[f"feedback_{i}"] = None
+                            st.session_state[f"timer_{i}"] = None
+                            st.session_state.question_times[f"time_{i}"] = {"start": None, "end": None, "duration": 0}
+                        
                         st.success(f"Quiz loaded with {len(questions)} questions!")
                         st.rerun()
         
@@ -472,27 +499,54 @@ if st.session_state.user and st.session_state.role == "student" and "quiz_questi
     st.markdown(f"**Class**: {st.session_state.quiz_info['class']} | "
                 f"**Difficulty**: {st.session_state.quiz_info['difficulty']} | "
                 f"**Questions**: {len(questions)}")
-    st.info("Click 'Start Answering' for each question to reveal it and begin timing.")
+    st.info("Click 'Start Question' to reveal each question and begin timing.")
     st.markdown("---")
 
+    # Initialize session state for answer feedback
+    if "answer_feedback" not in st.session_state:
+        st.session_state.answer_feedback = {}
+    
+    # Initialize session state for time tracking per question
+    if "question_times" not in st.session_state:
+        st.session_state.question_times = {}
+
     for i, q in enumerate(questions):
-        # Check if student has started answering this question
+        # Initialize timer for this question if not already started
+        timer_key = f"timer_{i}"
+        if timer_key not in st.session_state:
+            st.session_state[timer_key] = None
+            
+        # Initialize answer feedback for this question
+        feedback_key = f"feedback_{i}"
+        if feedback_key not in st.session_state:
+            st.session_state[feedback_key] = None
+            
+        # Initialize time tracking for this question
+        time_key = f"time_{i}"
+        if time_key not in st.session_state.question_times:
+            st.session_state.question_times[time_key] = {"start": None, "end": None, "duration": 0}
+
+        # Track if answer has been submitted for this question
+        answered_key = f"answered_{i}"
+        if answered_key not in st.session_state:
+            st.session_state[answered_key] = False
+
+        # Track if question has been started
         started_key = f"started_{i}"
         if started_key not in st.session_state:
             st.session_state[started_key] = False
-            
-        # Button to start answering
+
+        # Button to start the question
         if not st.session_state[started_key]:
-            if st.button(f"Start Answering Q{i+1}", key=f"start_btn_{i}"):
+            if st.button(f"Start Question {i+1}", key=f"start_btn_{i}"):
                 st.session_state[started_key] = True
                 # Start timer when student clicks the button
-                st.session_state.quiz_start_time[f"start_time_{i}"] = time.time()
+                st.session_state.question_times[time_key]["start"] = time.time()
                 st.rerun()
         else:
             # Show question and options once started
-            col1, col2 = st.columns([4, 1])
-            with col1:
-                st.markdown(f"**Q{i+1}. {q['question_text']}**")
+            st.markdown(f"**Q{i+1}. {q['question_text']}**")
+            
             # Show options
             options = q["options"]
             chosen = st.radio(
@@ -500,71 +554,108 @@ if st.session_state.user and st.session_state.role == "student" and "quiz_questi
                 options=list(options.keys()),
                 format_func=lambda opt: f"**{opt}**: {options[opt]}",
                 key=f"q_{i}",
-                horizontal=False
+                horizontal=False,
+                index=None  # No default selection
             )
-            st.session_state.current_answers[f"q_{i}"] = chosen
-        st.markdown("---")
-
-    # Submit Quiz
-    if st.button("✅ Submit Quiz"):
-        quiz_session_id = f"quiz_{int(time.time())}"
-        correct_count = 0
-        results_data = []
-
-        for i, q in enumerate(questions):
-            selected = st.session_state.current_answers.get(f"q_{i}")
-            is_correct = selected == q["correct_answer"]
-            if is_correct:
-                correct_count += 1
-
-            start_time = st.session_state.quiz_start_time.get(f"start_time_{i}", time.time())
-            time_taken = int(time.time() - start_time)
-
-            # Store result data for detailed display
-            results_data.append({
-                "question_num": i + 1,
-                "question_text": q["question_text"],
-                "selected_answer": selected,
-                "correct_answer": q["correct_answer"],
-                "is_correct": is_correct,
-                "time_taken": time_taken
-            })
-
-            try:
-                supabase.table("quiz_attempts").insert({
-                    "student_id": st.session_state.user.user.id,
-                    "question_id": q.get("id", i + 1),
-                    "selected_answer": selected,
-                    "is_correct": is_correct,
-                    "time_taken_seconds": time_taken,
-                    "quiz_session_id": quiz_session_id
-                }).execute()
-            except Exception as e:
-                st.error(f"Failed to save answer {i+1}: {str(e)}")
-
-        # Detailed Results
-        st.markdown("---")
-        st.subheader("📊 Quiz Results")
-        total = len(questions)
-        accuracy = int((correct_count / total) * 100)
-        st.success(f"🎉 Quiz Submitted! **{correct_count}/{total} Correct**")
-        st.info(f"🎯 Overall Accuracy: **{accuracy}%**")
-        if accuracy >= 80:
-            st.balloons()
-
-        # Show detailed results for each question
-        st.markdown("### Question-by-Question Analysis")
-        for result in results_data:
-            status_emoji = "✅" if result["is_correct"] else "❌"
-            status_text = "Correct" if result["is_correct"] else "Incorrect"
-            time_text = f"{result['time_taken']} seconds"
             
-            st.markdown(f"**Q{result['question_num']}. {result['question_text']}**")
-            st.markdown(f"- Your Answer: **{result['selected_answer']}**")
-            st.markdown(f"- Correct Answer: **{result['correct_answer']}**")
-            st.markdown(f"- Status: {status_emoji} {status_text}")
-            st.markdown(f"- Time Taken: ⏱️ {time_text}")
-            st.markdown("---")
+            # If an answer is selected and not yet processed, stop timer and provide immediate feedback
+            if chosen and not st.session_state[answered_key]:
+                # Update current answer
+                st.session_state.current_answers[f"q_{i}"] = chosen
+                
+                # Mark as answered
+                st.session_state[answered_key] = True
+                
+                # Stop timer
+                if st.session_state.question_times[time_key]["end"] is None:
+                    st.session_state.question_times[time_key]["end"] = time.time()
+                    st.session_state.question_times[time_key]["duration"] = \
+                        st.session_state.question_times[time_key]["end"] - st.session_state.question_times[time_key]["start"]
+                
+                # Provide immediate feedback
+                is_correct = chosen == q["correct_answer"]
+                if is_correct:
+                    st.session_state[feedback_key] = ("✅ Correct!", "green")
+                else:
+                    st.session_state[feedback_key] = (f"❌ Incorrect. The correct answer is {q['correct_answer']}", "red")
+                
+                # Save to database immediately
+                try:
+                    supabase.table("quiz_attempts").insert({
+                        "student_id": st.session_state.user.user.id,
+                        "question_id": q.get("id", i + 1),
+                        "selected_answer": chosen,
+                        "is_correct": is_correct,
+                        "time_taken_seconds": int(st.session_state.question_times[time_key]["duration"]),
+                        "quiz_session_id": f"quiz_{st.session_state.user.user.id}_{int(time.time())}"
+                    }).execute()
+                except Exception as e:
+                    st.error(f"Failed to save answer {i+1}: {str(e)}")
+                
+                st.rerun()
+            
+            # Show feedback if available and question has been answered
+            if st.session_state[feedback_key] and st.session_state[answered_key]:
+                feedback_text, feedback_color = st.session_state[feedback_key]
+                time_taken = st.session_state.question_times[time_key]["duration"]
+                st.markdown(f"<span style='color:{feedback_color}'>{feedback_text}</span>", unsafe_allow_html=True)
+                st.markdown(f"⏱️ Time taken: {int(time_taken)} seconds")
+        
+        st.markdown("---")
+
+    # Submit Quiz button (for completion tracking)
+    if st.button("✅ Finish Quiz"):
+        # Calculate and show final results
+        correct_count = 0
+        total_questions = len(questions)
+        
+        # Count correct answers
+        for i in range(total_questions):
+            answered_key = f"answered_{i}"
+            feedback_key = f"feedback_{i}"
+            if st.session_state.get(answered_key, False) and st.session_state.get(feedback_key):
+                feedback_text, _ = st.session_state[feedback_key]
+                if "✅ Correct!" in feedback_text:
+                    correct_count += 1
+        
+        # Show results
+        st.markdown("---")
+        st.subheader("📊 Final Quiz Results")
+        st.success(f"🎉 Quiz Completed! **{correct_count}/{total_questions} Correct**")
+        
+        if total_questions > 0:
+            accuracy = int((correct_count / total_questions) * 100)
+            st.info(f"🎯 Overall Accuracy: **{accuracy}%**")
+            if accuracy >= 80:
+                st.balloons()
+        
+        # Show question-by-question analysis
+        st.markdown("### Question-by-Question Analysis")
+        for i in range(total_questions):
+            answered_key = f"answered_{i}"
+            feedback_key = f"feedback_{i}"
+            time_key = f"time_{i}"
+            
+            if st.session_state.get(answered_key, False) and st.session_state.get(feedback_key):
+                feedback_text, _ = st.session_state[feedback_key]
+                time_taken = st.session_state.question_times.get(time_key, {}).get("duration", 0)
+                
+                status_emoji = "✅" if "✅ Correct!" in feedback_text else "❌"
+                status_text = "Correct" if "✅ Correct!" in feedback_text else "Incorrect"
+                
+                st.markdown(f"**Q{i+1}.** Status: {status_emoji} {status_text}")
+                st.markdown(f"⏱️ Time taken: {int(time_taken)} seconds")
+                st.markdown("---")
+        
+        # Clear quiz session state after showing results
+        if st.button("Close Results"):
+            keys_to_remove = ["quiz_questions", "quiz_start_time", "current_answers", "quiz_info", "answer_feedback", "question_times"]
+            for i in range(len(questions)):
+                keys_to_remove.extend([f"timer_{i}", f"feedback_{i}", f"time_{i}", f"started_{i}", f"start_btn_{i}", f"q_{i}", f"answered_{i}"])
+            for key in keys_to_remove:
+                if key in st.session_state:
+                    del st.session_state[key]
+            st.rerun()
     
 # =============================
 # DOUBT BOX - STUDENT
