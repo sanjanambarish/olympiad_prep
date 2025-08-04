@@ -17,7 +17,7 @@ NCERT_VIDEO_RESOURCES = {
     "Volume of Cube, Cuboid & Cylinder": "https://www.youtube.com/watch?v=XQntiGZydvE"
   },
         "Direct and Inverse Proportion": {
-            "Direct Proportion & Inverse Proportion": "https://www.youtube.com/live/4jZpJAiNBj4?si=3ZgL4MIQS9t2tBiX",
+            "Direct Proportion & Inverse Proportion": "https://www.youtube.com/watch?v=4jZpJAiNBj4&t=2s",
             
         },
         "Exponents and Powers": {

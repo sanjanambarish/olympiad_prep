@@ -7,6 +7,48 @@ import json
 import plotly.express as px
 import base64
 import os
+import google.generativeai as genai
+
+# Configure Gemini API (add your API key to environment variables)
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "AIzaSyAlRm3mbpE7O43u7Ohm2pw6wtzLDbrIR4Y")
+if GEMINI_API_KEY:
+    genai.configure(api_key=GEMINI_API_KEY)
+    model = genai.GenerativeModel('gemini-1.5-flash')
+else:
+    model = None
+# =============================
+# Gemini API Integration
+# =============================
+
+def get_gemini_explanation(question_text, options, correct_answer, student_answer):
+    """Generate explanation for wrong answers using Gemini API"""
+    if not model:
+        return "💡 To get AI-powered explanations, please configure your Gemini API key."
+    
+    try:
+        prompt = f"""
+        A student answered a math question incorrectly. Please provide a clear, step-by-step explanation 
+        of how to solve this problem correctly.
+        
+        Question: {question_text}
+        Options: {options}
+        Correct Answer: {correct_answer}
+        Student's Answer: {student_answer}
+        
+        Please explain:
+        1. Why the correct answer is right
+        2. Why the student's answer is wrong
+        3. Step-by-step solution to reach the correct answer
+        4. Key concepts to remember
+        
+        Keep the explanation clear and educational, appropriate for a student.
+        """
+        
+        response = model.generate_content(prompt)
+        return response.text
+    except Exception as e:
+        return f"💡 AI explanation temporarily unavailable. Please try again later. Error: {str(e)}"
+
 # =============================
 # Page Setup
 # =============================
@@ -243,10 +285,7 @@ else:
             st.session_state.page = "doubt_box_student"
             st.rerun()
         
-        st.sidebar.markdown("### 🤝 Social Learning")
-        if st.sidebar.button("👥 Study Groups", use_container_width=True):
-            st.session_state.page = "study_groups"
-            st.rerun()
+        # Study Groups feature removed as per user request
     
     elif st.session_state.role == "teacher":
         if st.sidebar.button("👩‍🏫 Dashboard", use_container_width=True):
@@ -394,19 +433,30 @@ if st.session_state.user and st.session_state.role == "student":
         col1, col2, col3 = st.columns(3)
         
         with col1:
-            # Create download button for study material PDF
-            if selected_chapter == "Mensuration":
-                pdf_file = "data/mensuration_study_material.pdf"
-                pdf_filename = "mensuration_study_material.pdf"
-            else:
-                pdf_file = "data/data_handling_study_material.pdf"
-                pdf_filename = "data_handling_study_material.pdf"
+            # Create download button for study material PDF based on selected chapter
+            chapter_to_pdf = {
+                "Mensuration": "data/Mensuration 8th.pdf",
+                "Data Handling": "data/Data Handling 8th.pdf",
+                "Algebraic Expressions and Identities": "data/Algebraic Expressions and Identities 8th.pdf",
+                "Comparing Quantities": "data/Comparing Quantities 8th.pdf",
+                "Direct and Inverse Proportions": "data/Direct and Inverse Proportions 8th.pdf",
+                "Exponents and Powers": "data/Exponents and Powers 8th.pdf",
+                "Factorisation": "data/Factorisation 8th.pdf",
+                "Linear Equations in One Variable": "data/Linear Equations in One Variable 8th.pdf",
+                "Playing with Numbers": "data/Playing with Numbers 8th.pdf",
+                "Squares and Square Roots": "data/Squares and Square Roots 8th.pdf",
+                "Rational Numbers": "data/rational numbers 8th.pdf"
+            }
+            
+            # Default fallback PDFs
+            pdf_file = chapter_to_pdf.get(selected_chapter, "data/mensuration_study_material.pdf")
+            pdf_filename = os.path.basename(pdf_file)
             
             if os.path.exists(pdf_file):
                 with open(pdf_file, "rb") as f:
                     pdf_data = f.read()
                 st.download_button(
-                    label="📚 Study Material (PDF)",
+                    label=f"📚 {selected_chapter} Study Material (PDF)",
                     data=pdf_data,
                     file_name=pdf_filename,
                     mime="application/pdf"
@@ -629,7 +679,7 @@ if st.session_state.user and st.session_state.role == "student" and "quiz_questi
             if accuracy >= 80:
                 st.balloons()
         
-        # Show question-by-question analysis
+        # Show question-by-question analysis with AI explanations for wrong answers
         st.markdown("### Question-by-Question Analysis")
         for i in range(total_questions):
             answered_key = f"answered_{i}"
@@ -645,6 +695,22 @@ if st.session_state.user and st.session_state.role == "student" and "quiz_questi
                 
                 st.markdown(f"**Q{i+1}.** Status: {status_emoji} {status_text}")
                 st.markdown(f"⏱️ Time taken: {int(time_taken)} seconds")
+                
+                # For incorrect answers, show AI explanation
+                if "❌" in feedback_text and i < len(questions):
+                    question = questions[i]
+                    student_answer = st.session_state.current_answers.get(f"q_{i}", "Not answered")
+                    
+                    with st.expander("💡 AI-Powered Explanation", expanded=False):
+                        with st.spinner("Generating explanation..."):
+                            explanation = get_gemini_explanation(
+                                question["question_text"],
+                                question["options"],
+                                question["correct_answer"],
+                                student_answer
+                            )
+                            st.markdown(explanation)
+                
                 st.markdown("---")
         
         # Clear quiz session state after showing results
