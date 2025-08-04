@@ -502,6 +502,7 @@ if st.session_state.user and st.session_state.role == "student":
                         st.session_state.quiz_start_time = {}
                         st.session_state.current_answers = {}
                         st.session_state.current_question = 0
+                        st.session_state.question_times = {}
                         st.session_state.quiz_info = {
                             "class": selected_class,
                             "chapter": selected_chapter,
