@@ -1,176 +1,135 @@
 import streamlit as st
+import os
+from supabase_client import supabase
 
-def show_data_handling_material():
-    """Display study material for Data Handling - Class 8"""
-    st.title("📚 Data Handling - Class 8 Study Material")
-    
-    st.markdown("""
-    ## 1. What is Data?
-    Data is a collection of facts or information. Examples include marks of students, daily temperatures, or number of people in different age groups.
-    
-    ## 2. Organizing Data
-    Instead of writing random numbers, we organize them using:
-    - Tables
-    - Tally Marks
-    - Pictographs
-    - Bar Graphs
-    
-    ## 3. Tally Marks
-    Tally marks help quickly count data in groups of 5.
-    
-    **Example:**
-    
-    | Fruit | Tally | Frequency |
-    |-------|-------|-----------|
-    | Apple | |||| | 4 |
-    | Banana | |||| || | 7 |
-    | Orange | |||| |||| | 9 |
-    
-    ## 4. Pictograph
-    A pictograph uses pictures to show data. 
-    
-    **Example:** 🍎 = 2 apples. So 🍎🍎🍎 = 6 apples.
-    
-    ## 5. Bar Graph
-    A bar graph uses bars (rectangles) to show data. Each bar's height represents the value.
-    
-    ## 6. Histogram (Advanced)
-    A histogram is like a bar graph but used for continuous data such as marks or heights.
-    
-    ## 7. Circle Graph (Pie Chart)
-    A circle graph is divided into sectors. Each sector represents a part of the whole.
-    
-    ## 8. Measures of Central Tendency
-    These are used to find the average or middle value.
-    
-    - **Mean (Average):** Sum of values ÷ Number of values
-      *Example: 10, 15, 20 → Mean = (10+15+20)/3 = 15*
-      
-    - **Median:** Middle value when data is arranged in order.
-      *Example: 10, 15, 20 → Median = 15*
-      *If even number of values: 10, 20, 30, 40 → Median = (20+30)/2 = 25*
-      
-    - **Mode:** Value that appears most often.
-      *Example: 10, 15, 15, 20 → Mode = 15*
-    
-    ## 9. Probability (Introduction)
-    Probability tells how likely something is to happen.
-    
-    *Example: Tossing a coin → Chance of Heads = 1/2*
-    
-    **Formula:** Probability = Favourable Outcomes / Total Outcomes
-    
-    *Example: Dice roll → Probability of 3 = 1/6*
-    
-    ## 10. Summary Table
-    
-    | Concept | Meaning |
-    |---------|---------|
-    | Data | Information in numbers |
-    | Tally Marks | Counting in 5s |
-    | Pictograph | Data using pictures |
-    | Bar Graph | Bars for comparison |
-    | Mean | Average |
-    | Median | Middle value |
-    | Mode | Most frequent number |
-    | Probability | Likelihood of an event |
-    
-    ## 11. Example Questions
-    
-    1. Find the mean of 12, 15, 10, 13 → (12+15+10+13)/4 = 12.5
-    2. Find the mode of 5, 7, 7, 8, 9 → Mode = 7
-    3. Median of 2, 4, 6, 8 → (4+6)/2 = 5
-    4. Probability of red ball from 3 red, 2 blue → 3/5
-    """)
+# Class 10 Study Materials Mapping
+# Format: {chapter_name: pdf_filename}
+CLASS_10_STUDY_MATERIALS = {
+    "Real Numbers": "real numbers 10th.pdf",
+    "Polynomials": "Polynomials 10th.pdf",
+    "Pair Of Linear Equations In Two Variables": "Pair Of Linear Equations In Two Variables 10th.pdf",
+    "Quadratic Equations": "Quadratic Equations 10th.pdf",
+    "Arithmetic Progressions": "Arithmetic Progressions 10th.pdf",
+    "Introduction to Trigonometry": "Introduction to Trigonometry 10th.pdf",
+    "Statistics": "Statistics 10th.pdf",
+    "Probability": "Probability 10th.pdf"
+}
 
-def show_mensuration_material():
-    """Display study material for Mensuration - Class 8"""
-    st.title("📐 Mensuration - Class 8 Study Material")
+# Class 9 Study Materials Mapping
+CLASS_9_STUDY_MATERIALS = {
+    "Number Systems": "Number Systems 9th.pdf",
+    "Polynomials": "Polynomials 9th.pdf",
+    "Coordinate Geometry": "Coordinate Geometry 9th.pdf",
+    "Linear Equations in Two Variables": "Linear Equations in Two Variables 9th.pdf",
+    "Introduction to Euclids Geometry": "Introduction to Euclids Geometry 9th.pdf",
+    "Lines and Angles": "Lines and Angles 9th.pdf",
+    "Triangles": "Triangles 9th.pdf",
+    "Quadrilaterals": "Quadrilaterals 9th.pdf"
+}
+
+# Class 8 Study Materials Mapping
+CLASS_8_STUDY_MATERIALS = {
+    "Rational Numbers": "rational numbers 8th.pdf",
+    "Linear Equations in One Variable": "Linear Equations in One Variable 8th.pdf",
+    "Understanding Quadrilaterals": "Understanding Quadrilaterals 8th.pdf",
+    "Practical Geometry": "Practical Geometry 8th.pdf",
+    "Data Handling": "Data Handling 8th.pdf",
+    "Squares and Square Roots": "Squares and Square Roots 8th.pdf",
+    "Cube and Cube Roots": "Cube and Cube Roots 8th.pdf",
+    "Comparing Quantities": "Comparing Quantities 8th.pdf",
+    "Algebraic Expressions and Identities": "Algebraic Expressions and Identities 8th.pdf",
+    "Visualizing Solid Shapes": "Visualizing Solid Shapes 8th.pdf",
+    "Mensuration": "Mensuration 8th.pdf",
+    "Exponents and Powers": "Exponents and Powers 8th.pdf",
+    "Direct and Inverse Proportions": "Direct and Inverse Proportions 8th.pdf",
+    "Factorisation": "Factorisation 8th.pdf",
+    "Playing with Numbers": "Playing with Numbers 8th.pdf"
+}
+
+def get_study_materials_for_class(class_level):
+    """Get study materials mapping for a specific class"""
+    if class_level == 10:
+        return CLASS_10_STUDY_MATERIALS
+    elif class_level == 9:
+        return CLASS_9_STUDY_MATERIALS
+    elif class_level == 8:
+        return CLASS_8_STUDY_MATERIALS
+    else:
+        return {}
+
+def show_study_material(class_level, chapter):
+    """Display study material PDF for a specific class and chapter"""
+    materials = get_study_materials_for_class(class_level)
     
-    st.markdown("""
-    ## Chapter 11: Mensuration
-    Based on NCERT Curriculum
+    if chapter in materials:
+        pdf_filename = materials[chapter]
+        pdf_path = os.path.join("data", pdf_filename)
+        
+        # Check if file exists
+        if os.path.exists(pdf_path):
+            # Display PDF using Streamlit's built-in PDF viewer
+            with open(pdf_path, "rb") as file:
+                st.subheader(f"📚 {chapter} - Study Material")
+                st.caption(f"Class {class_level}")
+                st.download_button(
+                    label="📥 Download PDF",
+                    data=file,
+                    file_name=pdf_filename,
+                    mime="application/pdf"
+                )
+                
+                # Show PDF in Streamlit
+                st.markdown("---")
+                st.markdown("### Study Material Preview")
+                st.caption("Note: Scroll down to see the full document")
+                st.markdown("---")
+                
+                # Display PDF using Streamlit's PDF viewer
+                st.markdown("---")
+                st.markdown("### Full Document Viewer")
+                st.caption("Use the download button above to save this material for offline study")
+                st.markdown("---")
+                
+                # Reset file pointer to beginning
+                file.seek(0)
+                pdf_bytes = file.read()
+                st.download_button(
+                    label="📥 Download PDF (Alternative)",
+                    data=pdf_bytes,
+                    file_name=pdf_filename,
+                    mime="application/pdf",
+                    key="download_pdf_alt"
+                )
+                
+                # Try to display PDF inline
+                try:
+                    import base64
+                    base64_pdf = base64.b64encode(pdf_bytes).decode('utf-8')
+                    pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="100%" height="600px"></iframe>'
+                    st.markdown(pdf_display, unsafe_allow_html=True)
+                except Exception as e:
+                    st.warning("Unable to display PDF inline. Please use the download button to view the material.")
+                    st.error(f"Error details: {str(e)}")
+        else:
+            st.error(f"Study material file not found: {pdf_filename}")
+    else:
+        st.info(f"No study material available for {chapter} yet. More materials coming soon!")
+
+def show_study_material_dashboard():
+    """Show a dashboard of all available study materials by class and chapter"""
+    st.title("📚 Study Materials")
+    st.info("Browse comprehensive study materials organized by class and chapter")
     
-    🔷 1. Introduction
-    Mensuration is the branch of mathematics that deals with measurement of shapes and objects, including their lengths, areas, and volumes. It is used in real life for tasks such as finding the area of land, volume of containers, and surface area of objects.
+    # Class selection
+    selected_class = st.selectbox("Select Class", [8, 9, 10], key="study_class_selector")
     
-    This chapter focuses on:
+    materials = get_study_materials_for_class(selected_class)
     
-    - Area of trapezium, general quadrilateral, and polygons
-    
-    - Surface area and volume of cuboid and cube
-    
-    - Unit conversions for area and volume
-    
-    🔷 2. Area of Plane Figures
-    📌 2.1 Trapezium
-    A trapezium has one pair of parallel sides.
-    
-    Formula:
-    Area = 1/2 × (a + b) × h
-    where:
-    a and b = lengths of the parallel sides
-    h = height (distance between them)
-    
-    📌 2.2 General Quadrilateral
-    Any quadrilateral can be divided into two triangles.
-    
-    Formula:
-    Area = 1/2 × diagonal × (height1 + height2)
-    
-    📌 2.3 Polygons
-    Polygons like pentagons and hexagons can be broken into triangles or trapeziums. Find the area of each part and add them to get total area.
-    
-    🔷 3. Surface Area of Solids
-    🧱 3.1 Cuboid
-    Lateral Surface Area = 2 × (length + breadth) × height
-    
-    Total Surface Area = 2 × (length × breadth + breadth × height + height × length)
-    
-    🧊 3.2 Cube
-    Lateral Surface Area = 4 × side²
-    
-    Total Surface Area = 6 × side²
-    
-    🔷 4. Volume of Solids
-    🧱 4.1 Cuboid
-    Volume = length × breadth × height
-    
-    🧊 4.2 Cube
-    Volume = side × side × side (side³)
-    
-    🔷 5. Units and Conversions
-    
-    | Quantity | Units | Conversion |
-    |----------|-------|------------|
-    | Length | cm, m | 1 m = 100 cm |
-    | Area | cm², m² | 1 m² = 10,000 cm² |
-    | Volume | cm³, m³ | 1 m³ = 1,000,000 cm³ |
-    
-    🔷 6. Real-Life Applications
-    - Estimating floor area of rooms
-    
-    - Finding volume of water tanks
-    
-    - Measuring paint needed for walls
-    
-    - Designing tiles or garden plots
-    
-    🔷 7. Solved Example
-    Q: Find the area of a trapezium with parallel sides 10 cm and 6 cm, and height 5 cm.
-    
-    Solution:
-    Area = 1/2 × (10 + 6) × 5 = 1/2 × 16 × 5 = 40 cm²
-    
-    🔷 8. Tips for Practice
-    - Learn and revise all formulas regularly
-    
-    - Convert units to the same system before solving
-    
-    - Understand the difference between area and volume
-    
-    - Solve all NCERT examples and exercises
-    
-    📌 Conclusion
-    Mensuration helps in solving many practical problems in daily life. With a good understanding of formulas and practice, students can master this topic easily.
-    """)
+    if materials:
+        chapters = list(materials.keys())
+        selected_chapter = st.selectbox("Select Chapter", chapters, key="study_chapter_selector")
+        
+        if selected_chapter:
+            show_study_material(selected_class, selected_chapter)
+    else:
+        st.info("No study materials available for this class yet.")

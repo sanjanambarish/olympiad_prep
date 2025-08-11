@@ -29,30 +29,74 @@ NCERT_VIDEO_RESOURCES = {
     "Letters for Digits": "https://youtu.be/KUf1Yqhlmqw?si=Ir8iS7rVKYLbq1Tx"
   }
     },
-    9: {
-        "Number Systems": {
-            "Irrational Numbers": "https://www.youtube.com/watch?v=3X7gcB7dR7U",
-            "Real Numbers and their Decimal Expansions": "https://www.youtube.com/watch?v=5P9719u7NIM"
-        },
-        "Polynomials": {
-            "Polynomials in One Variable": "https://www.youtube.com/watch?v=7rK3VgI7F8w",
-            "Zeroes of a Polynomial": "https://www.youtube.com/watch?v=3X7gcB7dR7U"
-        },
-        "Coordinate Geometry": {
-            "Cartesian System": "https://www.youtube.com/watch?v=5P9719u7NIM"
-        }
+    
+  9: {
+    "Number Systems": {
+      "Full Chapter Lecture": "https://www.youtube.com/watch?v=IMnSIaPcqiE",
+      "Rational, Irrational & Real Numbers": "https://www.youtube.com/watch?v=4IQZ83iUBjI",
+      "Rational and Irrational Numbers – Detailed Explanation": "https://www.youtube.com/watch?v=3KnwD1dolBo",
+      "Plotting Irrational Numbers on the Number Line": "https://www.youtube.com/watch?v=aDKek9X4jC4",
+      "Irrational Numbers – NCERT Chapter 1 Topic": "https://www.youtube.com/watch?v=vEhfXjVc3zE"
     },
-    10: {
-        "Real Numbers": {
-            "Euclid's Division Lemma": "https://www.youtube.com/watch?v=3X7gcB7dR7U",
-            "The Fundamental Theorem of Arithmetic": "https://www.youtube.com/watch?v=7rK3VgI7F8w"
-        },
-        "Polynomials": {
-            "Geometrical Meaning of Zeroes": "https://www.youtube.com/watch?v=5P9719u7NIM",
-            "Relationship between Zeroes and Coefficients": "https://www.youtube.com/watch?v=3X7gcB7dR7U"
-        }
+    "Polynomials": {
+      "Full Chapter Lecture": "https://www.youtube.com/watch?v=4VHrvMutJQw",
+      "Introduction and Definitions": "https://www.youtube.com/watch?v=-nzUVj4zbIU",
+      "Basic Concepts Explained in Detail": "https://www.youtube.com/watch?v=YnFHxA4aJAs",
+      "Exercise 2.1 Solved Examples": "https://www.youtube.com/watch?v=BGLHDudXCdE"
+    },
+    "Coordinate Geometry": {
+      "Full Chapter Playlist": "https://www.youtube.com/playlist?list=PLoHhdH7lwiIFYn_zP1_sTYhvWv3lc3Gmi",
+      "Introduction to Coordinate Geometry": "https://www.youtube.com/watch?v=P-Wkq5QjBMs",
+      "Plotting Points in a Plane (NCERT)": "https://www.youtube.com/watch?v=fkh6kJcZOMg"
+    },
+    "Linear Equations in Two Variables": {
+      "Full Chapter Video": "https://www.youtube.com/watch?v=rnudiJxVXxM",
+      "Concept Introduction": "https://www.youtube.com/watch?v=EtHj_WhP-NA",
+      "Chapter Explained in Full Detail (NCERT Solutions)": "https://www.youtube.com/watch?v=azj5FA3w0xU",
+      "Exercise 4.1 Solution Walkthrough": "https://www.youtube.com/watch?v=kEsalPdruDE"
+    },
+    "Introduction to Euclid’s Geometry": {
+      "Full Chapter Video (One-Shot)": "https://www.youtube.com/watch?v=obHLST63Nrs"
+    },
+    "Lines and Angles": {
+      "Full Chapter Lecture": "https://www.youtube.com/watch?v=pIEt9y3wXp8",
+      "Types of Angle Pairs": "https://www.youtube.com/watch?v=hMYV-Pp3Li0"
+    },
+    "Triangles": {
+      "Full Chapter Video": "https://www.youtube.com/watch?v=wIeiqvdVCJI",
+      "Comprehensive One‑Shot Chapter": "https://www.youtube.com/watch?v=vc_AR7guu8E",
+      "Detailed Explanation with NCERT Solutions and MCQs": "https://www.youtube.com/watch?v=ddQODZ28pjM"
+    },
+    "Quadrilaterals": {
+      "Full Chapter Video (One-Shot)": "https://www.youtube.com/watch?v=Y8mfN42SJ6k"
     }
+  },
+  10: {
+    "Real Numbers": {
+      "Full Chapter": "https://www.youtube.com/watch?v=-UdHmSTmQtw"
+    },
+    "Polynomials": {
+      "Full Chapter": "https://www.youtube.com/watch?v=Us2I1wAfs7g"
+    },
+    "Triangles": {
+      "Full Chapter": "https://www.youtube.com/watch?v=4zsA9r2euAc"
+    },
+    "Quadratic Equations": {
+      "Full Chapter": "https://www.youtube.com/watch?v=GtKXeWrZeuk"
+    },
+    "Arithmetic Progressions": {
+      "Full Chapter": "https://www.youtube.com/watch?v=NUsxSiOpW54"
+    },
+    "Pair of Linear Equations in Two Variables": {
+      "Full Chapter": "https://www.youtube.com/watch?v=p_yr53bhesU"
+    },
+    "Probability": {
+      "Chapter 14 – Probability": "https://www.youtube.com/watch?v=OE9TXeMCqKs",
+      "Alternate for Probability": "https://www.youtube.com/watch?v=NX2qmFZwb4I"
+    }
+  }
 }
+
 
 def get_video_resources(class_level, chapter):
     """Get available video resources for a specific class and chapter"""

@@ -215,6 +215,30 @@ if not st.session_state.user:
                                         }
                                     }
                                 })
+                                
+                                # Create user record in users table if it doesn't exist
+                                if response.user:
+                                    try:
+                                        # Check if user exists in users table
+                                        user_check = supabase.table("users").select("*").eq("id", response.user.id).execute()
+                                        
+                                        if not user_check.data:
+                                            # Create user record if it doesn't exist
+                                            user_data = {
+                                                "id": response.user.id,
+                                                "email": email,
+                                                "full_name": full_name,
+                                                "class": student_class,
+                                                "role": "student"
+                                            }
+                                            supabase.table("users").insert(user_data).execute()
+                                        else:
+                                            # Update role if user exists but role is not set
+                                            supabase.table("users").update({"role": "student"}).eq("id", response.user.id).execute()
+                                    except Exception as db_error:
+                                        st.error(f"❌ Database error: {str(db_error)}")
+                                        # Continue with registration success message even if database update fails
+                                
                                 st.success("✅ Registration successful! Please check your email for verification link.")
                                 st.info("💡 Tip: Check your spam folder if you don't see the email")
                         except Exception as e:
@@ -255,8 +279,26 @@ if not st.session_state.user:
                                     }
                                 })
                                 if response.user:
-                                    # Update role to 'teacher' in public.users
-                                    supabase.table("users").update({"role": "teacher"}).eq("id", response.user.id).execute()
+                                    try:
+                                        # Check if user exists in users table
+                                        user_check = supabase.table("users").select("*").eq("id", response.user.id).execute()
+                                        
+                                        if not user_check.data:
+                                            # Create user record if it doesn't exist
+                                            user_data = {
+                                                "id": response.user.id,
+                                                "email": email,
+                                                "full_name": full_name,
+                                                "role": "teacher"
+                                            }
+                                            supabase.table("users").insert(user_data).execute()
+                                        else:
+                                            # Update role if user exists but role is not set
+                                            supabase.table("users").update({"role": "teacher"}).eq("id", response.user.id).execute()
+                                    except Exception as db_error:
+                                        st.error(f"❌ Database error: {str(db_error)}")
+                                        # Continue with registration success message even if database update fails
+                                    
                                     st.success("✅ Teacher registration successful! Please check your email for verification link.")
                                     st.info("💡 Tip: Check your spam folder if you don't see the email")
                                 else:
@@ -435,6 +477,7 @@ if st.session_state.user and st.session_state.role == "student":
         with col1:
             # Create download button for study material PDF based on selected chapter
             chapter_to_pdf = {
+                # Class 8
                 "Mensuration": "data/Mensuration 8th.pdf",
                 "Data Handling": "data/Data Handling 8th.pdf",
                 "Algebraic Expressions and Identities": "data/Algebraic Expressions and Identities 8th.pdf",
@@ -445,7 +488,23 @@ if st.session_state.user and st.session_state.role == "student":
                 "Linear Equations in One Variable": "data/Linear Equations in One Variable 8th.pdf",
                 "Playing with Numbers": "data/Playing with Numbers 8th.pdf",
                 "Squares and Square Roots": "data/Squares and Square Roots 8th.pdf",
-                "Rational Numbers": "data/rational numbers 8th.pdf"
+                "Rational Numbers": "data/rational numbers 8th.pdf",
+                
+                # Class 9
+                "Number Systems": "data/Number Systems 9th.pdf",
+                "Polynomials": "data/Polynomials 9th.pdf",
+                "Linear Equations in Two Variables": "data/Linear Equations in Two Variables 9th.pdf",
+                "Lines and Angles": "data/Lines and Angles 9th.pdf",
+                
+                # Class 10
+                "Real Numbers": "data/real numbers 10th.pdf",
+                "Polynomials": "data/Polynomials 10th.pdf",
+                "Pair Of Linear Equations In Two Variables": "data/Pair Of Linear Equations In Two Variables 10th.pdf",
+                "Quadratic Equations": "data/Quadratic Equations 10th.pdf",
+                "Arithmetic Progressions": "data/Arithmetic Progressions 10th.pdf",
+                "Introduction to Trigonometry": "data/Introduction to Trigonometry 10th.pdf",
+                "Statistics": "data/Statistics 10th.pdf",
+                "Probability": "data/Probability 10th.pdf"
             }
             
             # Default fallback PDFs
@@ -787,20 +846,21 @@ if st.session_state.user and st.session_state.role == "teacher":
     # Handle study material page
     if st.session_state.get("page") == "study_material":
         st.title("📚 Study Material")
-        from utils.study_material import show_data_handling_material, show_mensuration_material
+        from utils.study_material import show_study_material
         
         chapter = st.session_state.get("study_chapter", "Data Handling")
         
-        # Debug information
-        st.caption(f"Debug: Selected chapter is '{chapter}'")
-        st.caption(f"Debug: Chapter type is {type(chapter)}")
-        st.caption(f"Debug: Chapter.strip() == 'Mensuration' is {chapter.strip() == 'Mensuration'}")
-        
-        # Handle chapter selection (with case insensitive and strip for robustness)
-        if isinstance(chapter, str) and chapter.strip().lower() == "mensuration":
-            show_mensuration_material()
+        # Determine class based on chapter name or default to 8
+        # This is a simplified approach - in a real implementation, you might want to store class info in session state
+        if "10th" in chapter or any(term in chapter for term in ["Real Numbers", "Polynomials", "Pair Of Linear Equations", "Quadratic Equations", "Arithmetic Progressions", "Introduction to Trigonometry", "Statistics", "Probability"]):
+            selected_class = 10
+        elif "9th" in chapter or any(term in chapter for term in ["Number Systems", "Polynomials", "Linear Equations in Two Variables", "Lines and Angles"]):
+            selected_class = 9
         else:
-            show_data_handling_material()
+            selected_class = 8
+        
+        # Show the study material for the determined class and chapter
+        show_study_material(selected_class, chapter)
 
         if st.button("Back to Dashboard"):
             st.session_state.pop("page")
