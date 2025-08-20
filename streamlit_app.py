@@ -813,9 +813,6 @@ if st.session_state.user and st.session_state.role == "teacher":
 # =============================
 if st.session_state.user and st.session_state.role == "teacher":
     st.sidebar.divider()
-    if st.sidebar.button("📊 Class Dashboard"):
-        st.session_state.page = "teacher_dashboard"
-        st.rerun()
 
     if st.session_state.get("page") == "teacher_dashboard":
         st.title("👩‍🏫 Teacher Dashboard")

@@ -9,8 +9,8 @@ def student_doubt_box(student_id):
     
     with st.form("doubt_form"):
         doubt_text = st.text_area("Describe your doubt", height=150)
-        # Image upload (optional)
-        uploaded_image = st.file_uploader("Attach a screenshot (optional)", type=["png", "jpg", "jpeg"])
+        # File upload (optional) - supports images and documents
+        uploaded_file = st.file_uploader("Attach a file (optional) - Images, PDFs, Docs supported", type=["png", "jpg", "jpeg", "pdf", "doc", "docx"])
         submitted = st.form_submit_button("Submit Doubt")
         
         if submitted:
@@ -18,13 +18,16 @@ def student_doubt_box(student_id):
                 st.error("Please enter your doubt.")
             else:
                 try:
-                    # Upload image if provided
-                    image_url = None
-                    if uploaded_image:
+                    # Upload file if provided
+                    file_url = None
+                    if uploaded_file:
                         try:
-                            file_extension = uploaded_image.name.split('.')[-1]
+                            file_extension = uploaded_file.name.split('.')[-1]
                             file_name = f"doubt_{student_id}_{int(datetime.now().timestamp())}.{file_extension}"
-                            content_type = mimetypes.guess_type(uploaded_image.name)[0] or "image/jpeg"
+                            content_type = mimetypes.guess_type(uploaded_file.name)[0] or "application/octet-stream"
+                            
+                            # Read file content into bytes to avoid stream issues
+                            file_content = uploaded_file.read()
                             
                             # Upload to Supabase Storage
                             # Check if 'doubts' bucket exists
@@ -33,58 +36,71 @@ def student_doubt_box(student_id):
                                 doubt_bucket = next((b for b in buckets if b.name == "doubts"), None)
                                 if not doubt_bucket:
                                     st.warning("Storage bucket 'doubts' not found.")
-                                    st.info("Please verify the following in your Supabase dashboard:")
+                                    st.info("Please follow these steps to create the bucket in your Supabase dashboard:")
                                     st.markdown("""
-                                    1. Go to Storage → Buckets
-                                    2. Check if a bucket named 'doubts' exists
-                                    3. If not, create a new bucket named 'doubts'
-                                    4. Enable public access for the bucket
+                                    1. Go to Storage → Buckets in your Supabase dashboard
+                                    2. Click "New Bucket" and name it `doubts`
+                                    3. Enable public access for the bucket
+                                    4. Set up appropriate policies for authenticated users to insert files
                                     """)
-                                    st.info("The doubt will be submitted without the image.")
+                                    st.info("The doubt will be submitted without the file.")
                                 else:
                                     # Try to upload the file
                                     try:
-                                        supabase.storage.from_("doubts").upload(file_name, uploaded_image, {"content-type": content_type})
+                                        supabase.storage.from_("doubts").upload(file_name, file_content, {"content-type": content_type})
                                         # Get public URL
-                                        image_url_resp = supabase.storage.from_("doubts").get_public_url(file_name)
-                                        image_url = image_url_resp.get('publicUrl') or image_url_resp.get('public_url') or image_url_resp  # fallback
+                                        file_url_resp = supabase.storage.from_("doubts").get_public_url(file_name)
+                                        file_url = file_url_resp.get('publicUrl') or file_url_resp.get('public_url') or file_url_resp  # fallback
                                     except Exception as upload_error:
-                                        st.warning(f"Image upload failed: {str(upload_error)}")
+                                        st.warning(f"File upload failed: {str(upload_error)}")
                                         st.info("Please check the following in your Supabase dashboard:")
                                         st.markdown("""
                                         1. Go to Storage → Configuration → Policies
                                         2. Ensure authenticated users can insert files
                                         3. Check that the 'doubts' bucket has public read access
+                                        4. Verify that your Supabase key has sufficient permissions (service role key recommended)
                                         """)
-                                        st.info("The doubt will be submitted without the image.")
+                                        # Add more detailed error information
+                                        st.info(f"Debug info: file_name={file_name}, content_type={content_type}, content_length={len(file_content) if 'file_content' in locals() else 'unknown'}")
+                                        st.info("The doubt will be submitted without the file.")
                             except Exception as bucket_check_error:
                                 # Fallback method if list_buckets is not available
                                 try:
                                     supabase.storage.from_("doubts").list()
                                     # If we get here, bucket exists, try upload
                                     try:
-                                        supabase.storage.from_("doubts").upload(file_name, uploaded_image, {"content-type": content_type})
-                                        image_url_resp = supabase.storage.from_("doubts").get_public_url(file_name)
-                                        image_url = image_url_resp.get('publicUrl') or image_url_resp.get('public_url') or image_url_resp
-                                    except Exception as upload_error:
-                                        st.warning(f"Image upload failed: {str(upload_error)}")
-                                        st.info("Please check storage policies in your Supabase dashboard.")
-                                except Exception as fallback_error:
-                                    st.warning(f"Image upload failed: Could not access storage bucket.")
-                                    st.info("Please verify the 'doubts' storage bucket exists and has proper permissions.")
+                                        supabase.storage.from_("doubts").upload(file_name, file_content, {"content-type": content_type})
+                                        file_url_resp = supabase.storage.from_("doubts").get_public_url(file_name)
+                                        file_url = file_url_resp.get('publicUrl') or file_url_resp.get('public_url') or file_url_resp
+                                    except Exception as fallback_upload_error:
+                                        st.warning(f"File upload failed: {str(fallback_upload_error)}")
+                                        st.info("Please check the following in your Supabase dashboard:")
+                                        st.markdown("""
+                                        1. Go to Storage → Configuration → Policies
+                                        2. Ensure authenticated users can insert files
+                                        3. Check that the 'doubts' bucket has public read access
+                                        4. Verify that your Supabase key has sufficient permissions (service role key recommended)
+                                        """)
+                                        # Add more detailed error information
+                                        st.info(f"Debug info: file_name={file_name}, content_type={content_type}, content_length={len(file_content) if 'file_content' in locals() else 'unknown'}")
+                                        st.info("The doubt will be submitted without the file.")
+                                except Exception:
+                                    st.warning("Could not verify storage bucket. The doubt will be submitted without the file.")
                         except Exception as e:
-                            st.warning(f"Image upload failed: {str(e)}")
-                            st.info("The doubt has been submitted successfully without the image attachment.")
+                            st.warning(f"File processing failed: {str(e)}")
+                            st.info("The doubt will be submitted without the file.")
                     
-                    # Insert doubt
-                    supabase.table("doubts").insert({
+                    # Insert doubt into database
+                    doubt_data = {
                         "student_id": str(student_id),
                         "question_text": doubt_text,
-                        "image_url": image_url,
+                        "image_url": file_url,  # Using the same field for both images and documents
                         "status": "pending"
-                    }).execute()
+                    }
                     
-                    st.success("✅ Your doubt has been submitted! A teacher will respond soon.")
+                    result = supabase.table("doubts").insert(doubt_data).execute()
+                    st.success("✅ Doubt submitted successfully!")
+                    st.rerun()
                     st.balloons()
                     
                 except Exception as e:
@@ -110,7 +126,11 @@ def student_doubt_box(student_id):
                 st.markdown(f"**Your doubt:** {row['question_text']}")
                 
                 if row['image_url']:
-                    st.image(row['image_url'], caption="Attached Image")
+                    # Check if it's an image or document
+                    if row['image_url'].lower().endswith(('.png', '.jpg', '.jpeg')):
+                        st.image(row['image_url'], caption="Attached Image")
+                    else:
+                        st.markdown(f"[📎 Download Attachment]({row['image_url']})")
                 
                 # Fetch response
                 resp = supabase.table("doubt_responses").select("*").eq("doubt_id", row['id']).execute()
@@ -118,7 +138,11 @@ def student_doubt_box(student_id):
                     response_row = resp.data[0]
                     st.markdown(f"**Teacher Response:** {response_row['response_text']}")
                     if response_row.get('response_image_url'):
-                        st.image(response_row['response_image_url'], caption="Teacher's Diagram")
+                        # Check if it's an image or document
+                        if response_row['response_image_url'].lower().endswith(('.png', '.jpg', '.jpeg')):
+                            st.image(response_row['response_image_url'], caption="Teacher's Diagram/Attachment")
+                        else:
+                            st.markdown(f"[📎 Download Teacher's Attachment]({response_row['response_image_url']})")
                 else:
                     st.info("Waiting for teacher response...")
     except Exception as e:
@@ -147,35 +171,99 @@ def teacher_doubt_box(teacher_id):
                 st.markdown(f"**From:** {row['student']['full_name']} (Class {row.get('class', 'N/A')})")
                 st.markdown(f"**Question:** {row['question_text']}")
                 if row['image_url']:
-                    st.image(row['image_url'], caption="Student's Diagram")
+                    # Check if it's an image or document
+                    if row['image_url'].lower().endswith(('.png', '.jpg', '.jpeg')):
+                        st.image(row['image_url'], caption="Student's Diagram/Attachment")
+                    else:
+                        st.markdown(f"[📎 Download Student's Attachment]({row['image_url']})")
                 
                 # Reply form
                 with st.form(f"reply_form_{row['id']}"):
                     reply_text = st.text_area("Your Response", key=f"reply_text_{row['id']}")
-                    reply_image = st.file_uploader("Attach explanation image (optional)", type=["png", "jpg", "jpeg"], key=f"img_{row['id']}")
+                    reply_file = st.file_uploader("Attach explanation file (optional) - Images, PDFs, Docs supported", type=["png", "jpg", "jpeg", "pdf", "doc", "docx"], key=f"img_{row['id']}")
                     submitted = st.form_submit_button("Send Response")
                     
                     if submitted:
-                        if not reply_text.strip() and not reply_image:
-                            st.error("Please provide a text response or image.")
+                        if not reply_text.strip() and not reply_file:
+                            st.error("Please provide a text response or file.")
                         else:
                             try:
-                                # Upload image
-                                image_url = None
-                                if reply_image:
-                                    file_extension = reply_image.name.split('.')[-1]
-                                    file_name = f"reply_{row['id']}_{int(datetime.now().timestamp())}.{file_extension}"
-                                    content_type = mimetypes.guess_type(reply_image.name)[0] or "image/jpeg"
-                                    supabase.storage.from_("doubts").upload(file_name, reply_image, {"content-type": content_type})
-                                    image_url_resp = supabase.storage.from_("doubts").get_public_url(file_name)
-                                    image_url = image_url_resp.get('publicUrl') or image_url_resp.get('public_url') or image_url_resp
+                                # Upload file
+                                file_url = None
+                                if reply_file:
+                                    try:
+                                        file_extension = reply_file.name.split('.')[-1]
+                                        file_name = f"reply_{row['id']}_{int(datetime.now().timestamp())}.{file_extension}"
+                                        content_type = mimetypes.guess_type(reply_file.name)[0] or "application/octet-stream"
+                                        
+                                        # Read file content into bytes to avoid stream issues
+                                        file_content = reply_file.read()
+                                        
+                                        # Check if 'doubts' bucket exists
+                                        try:
+                                            buckets = supabase.storage.list_buckets()
+                                            doubt_bucket = next((b for b in buckets if b.name == "doubts"), None)
+                                            if not doubt_bucket:
+                                                st.warning("Storage bucket 'doubts' not found.")
+                                                st.info("Please follow these steps to create the bucket in your Supabase dashboard:")
+                                                st.markdown("""
+                                                1. Go to Storage → Buckets in your Supabase dashboard
+                                                2. Click "New Bucket" and name it `doubts`
+                                                3. Enable public access for the bucket
+                                                4. Set up appropriate policies for authenticated users to insert files
+                                                """)
+                                            else:
+                                                # Try to upload the file
+                                                try:
+                                                    supabase.storage.from_("doubts").upload(file_name, file_content, {"content-type": content_type})
+                                                    file_url_resp = supabase.storage.from_("doubts").get_public_url(file_name)
+                                                    file_url = file_url_resp.get('publicUrl') or file_url_resp.get('public_url') or file_url_resp
+                                                except Exception as upload_error:
+                                                    st.warning(f"File upload failed: {str(upload_error)}")
+                                                    st.info("Please check the following in your Supabase dashboard:")
+                                                    st.markdown("""
+                                                    1. Go to Storage → Configuration → Policies
+                                                    2. Ensure authenticated users can insert files
+                                                    3. Check that the 'doubts' bucket has public read access
+                                                    4. Verify that your Supabase key has sufficient permissions (service role key recommended)
+                                                    """)
+                                                    # Add more detailed error information
+                                                    st.info(f"Debug info: file_name={file_name}, content_type={content_type}, content_length={len(file_content) if 'file_content' in locals() else 'unknown'}")
+                                                    st.info("The response will be submitted without the file.")
+                                        except Exception as bucket_check_error:
+                                            # Fallback method if list_buckets is not available
+                                            try:
+                                                supabase.storage.from_("doubts").list()
+                                                # If we get here, bucket exists, try upload
+                                                try:
+                                                    supabase.storage.from_("doubts").upload(file_name, file_content, {"content-type": content_type})
+                                                    file_url_resp = supabase.storage.from_("doubts").get_public_url(file_name)
+                                                    file_url = file_url_resp.get('publicUrl') or file_url_resp.get('public_url') or file_url_resp
+                                                except Exception as fallback_upload_error:
+                                                    st.warning(f"File upload failed: {str(fallback_upload_error)}")
+                                                    st.info("Please check the following in your Supabase dashboard:")
+                                                    st.markdown("""
+                                                    1. Go to Storage → Configuration → Policies
+                                                    2. Ensure authenticated users can insert files
+                                                    3. Check that the 'doubts' bucket has public read access
+                                                    4. Verify that your Supabase key has sufficient permissions (service role key recommended)
+                                                    """)
+                                                    # Add more detailed error information
+                                                    st.info(f"Debug info: file_name={file_name}, content_type={content_type}, content_length={len(file_content) if 'file_content' in locals() else 'unknown'}")
+                                                    st.info(f"Error details: {fallback_upload_error.__class__.__name__}, {fallback_upload_error.__traceback__}")
+                                                    st.info("The response will be submitted without the file.")
+                                            except Exception:
+                                                st.warning("Could not verify storage bucket. The response will be submitted without the file.")
+                                    except Exception as e:
+                                        st.warning(f"File processing failed: {str(e)}")
+                                        st.info("The response will be submitted without the file.")
                                 
                                 # Insert response
                                 supabase.table("doubt_responses").insert({
                                     "doubt_id": row['id'],
                                     "teacher_id": str(teacher_id),
                                     "response_text": reply_text,
-                                    "response_image_url": image_url
+                                    "response_image_url": file_url
                                 }).execute()
                                 
                                 # Update doubt status
